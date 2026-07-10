@@ -1,0 +1,202 @@
+In general, a class can be equipped with two different kinds of data to form a class's properties.
+You already saw one of them when we were looking at stacks.
+This kind of class property exists when and only when it is explicitly created and added to an object.
+As you already know, this can be done during the object's initialization, performed by the constructor.
+Moreover, it can be done at any moment of the object's life. Furthermore, any existing property can be
+removed at any time.
+
+Such an approach has some important consequences:
+different objects of the same class may possess different sets of properties;
+there must be a way to safely check if a specific object owns the property you want to utilize
+(unless you want to provoke an exception – it's always worth considering)
+
+each object carries its own set of properties – they don't interfere with one another in any way.
+
+Such variables (properties) are called instance variables.
+
+The word instance suggests that they are closely connected to the objects (which are class instances), not to the classes themselves. Let's take a closer look at them.
+
+
+
+
+
+Class Variable:
+A class variable is a property which exists in just one copy and is stored outside any object.
+Note: no instance variable exists if there is no object in the class; a class variable exists in one
+copy even if there are no objects in the class.
+Class variables are created differently to their instance siblings. 
+
+Rule to Remember:
+__variable inside a class → name mangled (_ClassName__variable)
+__variable outside a class → stored exactly as written
+__dict__ shows the actual attribute names stored in the object.
+
+
+
+
+-->Checking the Attribute Existence:
+
+        class ExampleClass:
+            def __init__(self, val):
+                if val % 2 != 0:
+                    self.a = 1
+                else:
+                    self.b = 1
+
+            example_object = ExampleClass(1)
+            print(example_object.a)
+
+            try:
+                print(example_object.b)
+            except AttributeError:
+                pass
+
+        
+As you can see, this action isn't very sophisticated. Essentially, we've just swept the issue under the carpet.
+Fortunately, there is one more way to cope with the issue.
+Python provides a function which is able to safely check if any object/class contains a specified
+property. The function is named hasattr, and expects two arguments to be passed to it:
+
+the class or the object being checked;
+the name of the property whose existence has to be reported (note: it has to be a string containing the attribute name, not the name alone)
+The function returns True or False.
+
+This is how you can utilize it:
+class ExampleClass:
+    def __init__(self, val):
+        if val % 2 != 0:
+            self.a = 1
+        else:
+            self.b = 1
+ 
+example_object = ExampleClass(1)
+print(example_object.a)
+ 
+if hasattr(example_object, 'b'):
+    print(example_object.b)
+
+
+
+METHODS IN DETAIL:
+
+As you already know, a METHOD is a function embedded inside a class.
+There is one fundamental requirement – a method is obliged to have at least one parameter
+(there are no such things as parameterless methods – a method may be invoked without an argument, but not declared without parameters).
+The first (or only) parameter is usually named self. We suggest that you follow the convention –
+it's commonly used, and you'll cause a few surprises by using other names for it.
+The name self suggests the parameter's purpose – it identifies the object for which the method is invoked.
+If you're going to invoke a method, you mustn't pass the argument for the self parameter – Python will set it for you.
+The example in the editor shows the difference.
+
+
+
+
+Introspection and Reflection:
+introspection, which is the ability of a program to examine the type or properties of an object at runtime;
+
+reflection, which goes a step further, and is the ability of a program to manipulate the values, properties
+and/or functions of an object at runtime.
+
+
+
+
+Inheritance:
+
+class Star:
+    def __init__(self, name, galaxy):
+        self.name = name
+        self.galaxy = galaxy
+
+sun = Star("Sun", "Milky Way")
+print(sun)
+
+
+Output
+<__main__.Star object at 0x7f1074cc7c50>
+If you run the same code on your computer, you'll see something very similar, although 
+the hexadecimal number (the substring starting with 0x) will be different, as it's just an internal
+object identifier used by Python, and it's unlikely that it would appear the same when the same code
+is run in a different environment.
+As you can see, the printout here isn't really useful, and something more specific, or just prettier,
+may be more preferable.
+Fortunately, Python offers just such a function.
+When Python needs any class/object to be presented as a string (putting an object as an argument in the
+print() function invocation fits this condition) it tries to invoke a method named __str__() from the
+object and to use the string it returns.
+The default __str__() method returns the previous string – ugly and not very informative. You can change
+it just by defining your own method of the name.
+
+
+<code>class Star:
+    def __init__(self, name, galaxy):
+        self.name = name
+        self.galaxy = galaxy
+
+    def __str__(self):
+        return self.name + ' in ' + self.galaxy
+
+sun = Star("Sun", "Milky Way")
+print(sun)
+
+
+This new __str__() method makes a string consisting of the star's and galaxy's names – nothing special,
+but the print results look better now, doesn't it?
+Can you guess the output? Run the code to check if you were right.
+The term inheritance is older than computer programming, and it describes the common practice of passing
+different goods from one person to another upon that person's death. The term, when related to computer
+programming, has an entirely different meaning.
+
+Let's define the term for our purposes:
+Inheritance is a common practice (in object programming) of passing attributes and methods from the
+superclass (defined and existing) to a newly created class, called the subclass.
+In other words, inheritance is a way of building a new class, not from scratch, but by using an already 
+defined repertoire of traits. The new class inherits (and this is the key) all the already existing
+equipment, but is able to add some new ones if needed.
+Thanks to that, it's possible to build more specialized (more concrete) classes using some sets of
+predefined general rules and behaviors.
+
+
+
+
+class Vehicle:
+    pass
+
+class LandVehicle(Vehicle):
+    pass
+
+class TrackedVehicle(LandVehicle):
+    pass
+
+
+All the presented classes are empty for now, as we're going to show you how the mutual relations 
+between the super- and subclasses work. We'll fill them with contents soon.
+
+We can say that:
+The Vehicle class is the superclass for both the LandVehicle and TrackedVehicle classes;
+The LandVehicle class is a subclass of Vehicle and a superclass of TrackedVehicle at the same time;
+The TrackedVehicle class is a subclass of both the Vehicle and LandVehicle classes.
+We understand this just by reading the code (in other words, we know it because we can see it).
+
+Does Python know the same? Is it possible to ask Python about it? Yes, it is.
+
+
+
+issubclass(ClassOne, ClassTwo)
+
+class Vehicle:
+    pass
+
+
+class LandVehicle(Vehicle):
+    pass
+
+
+class TrackedVehicle(LandVehicle):
+    pass
+
+
+for cls1 in [Vehicle, LandVehicle, TrackedVehicle]:
+    for cls2 in [Vehicle, LandVehicle, TrackedVehicle]:
+        print(issubclass(cls1, cls2), end="\t")
+    print()
+

@@ -1,0 +1,9 @@
+Subsequence is a sequence inside a given input that may be contiguous or non contiguous in nature but
+follows the order of input.
+ex)
+[3,2,1]
+Subsequences : [],[3],[1],[2],[3,1],[1,2],[3,2],[3,1,2]========> n sized array have 2^n Subsequences.
+
+--->Basically generate all possible Subsequences of a given array can be done using BitManipulation by 
+    PowerSet.
+--->But here we learn through Recursion!!.
