@@ -27,21 +27,23 @@ public class GenerateAllSubSeq {
     }
 
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Enter size of array: ");
-        int n = s.nextInt();
-        System.out.println("Enter ele's of array: ");
-        int a[] = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = s.nextInt();
+        try (Scanner s = new Scanner(System.in)) {
+            System.out.println("Enter size of array: ");
+            int n = s.nextInt();
+            System.out.println("Enter ele's of array: ");
+            int a[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = s.nextInt();
+            }
+            System.out.println("The Subsequences are : ");
+            
+            GenerateAllSubSeq gs = new GenerateAllSubSeq();
+            gs.GeneAllSubSeq(0, a, new ArrayList<>());
+            
+            ArrayList<Integer> ls = new ArrayList<>();
+            gs.print(ls);
+        }catch(Exception e){
+            System.out.println("No i/p");
         }
-        System.out.println("The Subsequences are : ");
-
-        GenerateAllSubSeq gs = new GenerateAllSubSeq();
-        gs.GeneAllSubSeq(0, a, new ArrayList<>());
-
-        ArrayList<Integer> ls = new ArrayList<>();
-        gs.print(ls);
-        s.close();
     }
 }
