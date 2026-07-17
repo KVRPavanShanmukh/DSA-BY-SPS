@@ -1,0 +1,50 @@
+Weighted Graph Representation:
+
+Suppose:
+0---4--->1
+0---2--->2
+1---6--->2
+
+Store:
+0 → (1,4),(2,2)
+1 → (0,4),(2,6)
+2 → (0,2),(1,6)
+
+In Java, define a small helper class:
+
+class Pair {
+    int node;
+    int weight;
+
+    Pair(int node, int weight) {
+        this.node = node;
+        this.weight = weight;
+    }
+}
+
+Then:
+
+ArrayList<ArrayList<Pair>> graph = new ArrayList<>();
+
+for (int i = 0; i < n; i++) {
+    graph.add(new ArrayList<>());
+}
+
+graph.get(0).add(new Pair(1, 4));
+graph.get(1).add(new Pair(0, 4));
+
+graph.get(0).add(new Pair(2, 2));
+graph.get(2).add(new Pair(0, 2));
+
+This is the representation commonly used for algorithms like Dijkstra, Prim's, and Bellman-Ford.
+
+
+
+
+Time Complexity Comparison:
+| Operation          | Adjacency Matrix | Adjacency List |
+| ------------------ | ---------------: | -------------: |
+| Space              |            O(V²) |       O(V + E) |
+| Add Edge           |             O(1) |           O(1) |
+| Check Edge         |             O(1) |      O(degree) |
+| Traverse Neighbors |             O(V) |      O(degree) |

@@ -42,10 +42,10 @@ public class NumSubStrContaining3Chars {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         System.out.println("Enter the String :");
-        // char a[] = s.next().toCharArray();
         String a = s.next();
 
         NumSubStrContaining3Chars c3 = new NumSubStrContaining3Chars();
+        
         System.out.println("Total Subarrays having all 3 characters are : ");
         System.out.println(c3.numberOfSubstrings(a));
     }
