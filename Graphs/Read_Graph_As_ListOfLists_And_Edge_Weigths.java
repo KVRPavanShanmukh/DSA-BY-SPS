@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ReadListOfLists {
+public class Read_Graph_As_ListOfLists_And_Edge_Weigths {
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
@@ -38,19 +38,18 @@ public class ReadListOfLists {
         }
 
         // For Directed Graphs:
-        ArrayList<Integer>[] dals = new ArrayList[n + 1];
-        for (int i = 0; i <= n; i++) {
-            dals[i] = new ArrayList<>();
-        }
+        // ArrayList<Integer>[] dals = new ArrayList[n + 1];
+        // for (int i = 0; i <= n; i++) {
+        //     dals[i] = new ArrayList<>();
+        // }
 
-        for (int i = 0; i < m; i++) {
-            int u = s.nextInt();
-            int v = s.nextInt();
+        // for (int i = 0; i < m; i++) {
+        //     int u = s.nextInt();
+        //     int v = s.nextInt();
 
-            dals[u].add(v);
-            dals[v].add(u);
-        }
-
+        //     dals[u].add(v);
+        //     dals[v].add(u);
+        // }
 
         // To read as List of Lists:
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();

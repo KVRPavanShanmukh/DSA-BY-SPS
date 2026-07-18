@@ -1,7 +1,8 @@
 
 import java.util.Scanner;
 
-public class ReadAdjMat {
+public class Read_Graph_As_AdjMat {
+
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         System.out.println("Enter number of Nodes in Graph : ");

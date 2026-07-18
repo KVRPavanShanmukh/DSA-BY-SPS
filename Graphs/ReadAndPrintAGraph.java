@@ -36,12 +36,13 @@ public class ReadAndPrintAGraph {
         int V = s.nextInt();
         System.out.println("Enter number of Edges in Graph : ");
         int E = s.nextInt();
+
+        System.out.println("Enter Nodes and Edges in {Nodes}  {Edges} format : ");
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
         }
 
         for (int i = 0; i < E; i++) {
-
             int u = s.nextInt();
             int v = s.nextInt();
 
