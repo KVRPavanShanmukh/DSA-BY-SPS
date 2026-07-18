@@ -9,8 +9,8 @@ Welcome to the **DSA-BY-SPS** repository! This repository serves as a comprehens
 This repository is dedicated to tracking my progress, organizing structured solutions, and hosting implementations of vital data structures and programmatic algorithms. Whether you are reviewing concepts or preparing for coding interviews, this resource is organized to make navigation seamless.
 
 ## 🛠️ Tech Stack & Languages
-* **Primary Language:** [e.g., C++ / Java / Python / JavaScript]
-* **Environment/Tools:** [e.g., VS Code / GCC / LeetCode / HackerRank]
+* **Primary Language:** Java
+* **Environment/Tools:** VS Code / LeetCode
 
 ---
 
