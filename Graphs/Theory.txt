@@ -48,3 +48,76 @@ Time Complexity Comparison:
 | Add Edge           |             O(1) |           O(1) |
 | Check Edge         |             O(1) |      O(degree) |
 | Traverse Neighbors |             O(V) |      O(degree) |
+
+
+
+
+DFS vs BFS:
+| DFS                                                              | BFS                                                                |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Goes deep first                                                  | Explores level by level                                            |
+| Uses Recursion/Stack                                             | Uses Queue                                                         |
+| Good for connected components, cycle detection, topological sort | Good for shortest path in unweighted graphs, level order traversal |
+| Path may not be shortest                                         | Finds shortest path (unweighted graph)                             |
+
+
+Once you know both DFS and BFS, you'll unlock a lot of graph problems.
+
+Stage 1 (Traversal)
+✅ DFS
+⏭ BFS
+Stage 2 (Applications of DFS/BFS)
+Connected Components
+Number of Provinces
+Number of Islands
+Flood Fill
+Rotten Oranges
+Surrounded Regions
+Stage 3 (Cycle Detection)
+Cycle Detection in Undirected Graph (DFS)
+Cycle Detection in Undirected Graph (BFS)
+Cycle Detection in Directed Graph
+Stage 4 (Topological Sorting)
+Kahn's Algorithm (BFS)
+DFS Topological Sort
+Course Schedule
+Stage 5 (Shortest Path)
+BFS Shortest Path (Unweighted)
+Dijkstra
+Bellman-Ford
+Floyd-Warshall
+Stage 6 (Advanced)
+Disjoint Set Union (Union-Find)
+Kruskal
+Prim
+Bridges
+Articulation Points
+Strongly Connected Components
+
+
+
+
+So Far We Covered:
+Graph Basics          ✅
+Adjacency List        ✅
+DFS                   ✅
+        ↓
+BFS                   ⏭
+        ↓
+Connected Components
+        ↓
+Number of Provinces
+        ↓
+Cycle Detection
+        ↓
+Number of Islands
+        ↓
+Topological Sort
+        ↓
+Shortest Path
+        ↓
+MST (Prim & Kruskal)
+        ↓
+DSU
+        ↓
+Advanced Graphs

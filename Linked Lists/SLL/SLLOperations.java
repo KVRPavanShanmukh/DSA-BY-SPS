@@ -1,8 +1,10 @@
+
 import java.util.Scanner;
 
 class SLL {
 
     class Node {
+
         int data;
         Node next;
 
@@ -17,10 +19,10 @@ class SLL {
 
     // Insert at Beginning
     public void insertAtBeginning(int data) {
-        Node newNode = new Node(data);
+        Node newNode = new Node(data);  //this creates a seperate Node in free space.
 
         if (head == null) {
-            head = tail = newNode;
+            head = tail = newNode;  //newnode --> head, newnode ---> tail.
         } else {
             newNode.next = head;
             head = newNode;
@@ -175,6 +177,7 @@ class SLL {
 }
 
 public class SLLOperations {
+
     public static void main(String[] args) {
 
         Scanner s = new Scanner(System.in);
