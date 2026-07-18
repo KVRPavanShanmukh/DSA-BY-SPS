@@ -1,0 +1,6 @@
+| BFS                               | DFS                               |
+| --------------------------------- | --------------------------------- |
+| Queue                             | Recursion (Call Stack)            |
+| Store `(node, parent)` in queue   | Pass `parent` as a parameter      |
+| Pop from queue                    | Recursive call                    |
+| If visited and not parent → Cycle | If visited and not parent → Cycle |

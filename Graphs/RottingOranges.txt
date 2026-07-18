@@ -1,0 +1,70 @@
+Don't memorize any code.
+Instead, remember this pattern:
+
+Scan Grid
+↓
+Push all sources into Queue
+↓
+Count targets
+↓
+while(queue not empty){
+    size = queue.size()
+    process one level
+    add new nodes
+    answer++
+}
+
+
+
+
+
+The only three new concepts you learned:
+1. Queue stores coordinates
+
+Instead of
+
+Queue<Integer>
+
+we use
+
+Queue<int[]>
+
+because we need
+
+(row, col)
+
+together.
+
+2. Direction Arrays
+
+Instead of writing
+
+up
+down
+left
+right
+
+everywhere,
+
+we use
+
+dr = {-1,1,0,0}
+dc = {0,0,-1,1}
+
+This becomes a standard template for all grid problems.
+
+3. Level Order BFS
+
+This is the biggest concept.
+
+int size = q.size();
+
+for(int i = 0; i < size; i++) {
+    ...
+}
+
+minutes++;
+
+Every time this loop finishes,
+
+one minute has passed.
