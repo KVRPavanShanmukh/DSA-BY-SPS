@@ -280,8 +280,6 @@ Your support motivates me to keep improving and adding more content.
 
 ## 📌 Future Plans
 
-- Complete Striver's A2Z DSA Sheet
-- Complete LeetCode Top Interview 150
 - Add System Design Notes
 - Add Interview Experiences
 - Add Complexity Analysis for every problem
