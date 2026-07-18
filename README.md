@@ -1,57 +1,294 @@
-# Data Structures and Algorithms (DSA) - SPS
+# 🚀 DSA-BY-SPS
 
-Welcome to the **DSA-BY-SPS** repository! This repository serves as a comprehensive collection of Data Structures and Algorithms implementations, problem-solving techniques, and code variations designed to strengthen core computer science concepts and ace technical interviews.
+Welcome to **DSA-BY-SPS**! This repository is a structured collection of **Data Structures and Algorithms (DSA)** implementations, coding patterns, and problem-solving approaches. It serves as my personal learning journey while also acting as a resource for anyone preparing for coding interviews, competitive programming, or strengthening core Computer Science concepts.
 
 ---
 
-## 🚀 Overview
+## 📖 Overview
 
-This repository is dedicated to tracking my progress, organizing structured solutions, and hosting implementations of vital data structures and programmatic algorithms. Whether you are reviewing concepts or preparing for coding interviews, this resource is organized to make navigation seamless.
+The primary goal of this repository is to:
 
-## 🛠️ Tech Stack & Languages
-* **Primary Language:** Java
-* **Environment/Tools:** VS Code / LeetCode
+- 📚 Learn and master Data Structures & Algorithms.
+- 💻 Practice coding interview problems.
+- 🧠 Understand multiple approaches to the same problem.
+- ⚡ Improve Time and Space Complexity through optimized solutions.
+- 📈 Track my DSA learning progress consistently.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Language:** Java
+- **IDE:** VS Code
+- **Practice Platforms:**
+  - LeetCode
+  - GeeksforGeeks
+  - HackerRank
+  - CodeChef
 
 ---
 
 ## 📂 Repository Structure
 
-The codebase is grouped systematically into specific categories for easy access:
-
 ```text
+DSA-BY-SPS/
+│
 ├── Data Structures/
 │   ├── Arrays/
+│   ├── Strings/
 │   ├── Linked Lists/
-│   ├── Stacks & Queues/
-│   ├── Trees & Graphs/
-│   └── Heaps & Hash Tables/
+│   ├── Stacks/
+│   ├── Queues/
+│   ├── Trees/
+│   ├── Graphs/
+│   ├── Heaps/
+│   └── Hashing/
+│
 ├── Algorithms/
-│   ├── Sorting & Searching/
-│   ├── Recursion & Backtracking/
+│   ├── Sorting/
+│   ├── Searching/
+│   ├── Recursion/
+│   ├── Backtracking/
 │   ├── Dynamic Programming/
-│   └── Greedy Algorithms/
-└── Competitive Programming/
-    └── LeetCode / GeeksforGeeks solutions
+│   ├── Greedy/
+│   ├── Sliding Window/
+│   ├── Two Pointers/
+│   ├── Binary Search/
+│   └── Bit Manipulation/
+│
+├── Competitive Programming/
+│   ├── LeetCode/
+│   ├── GeeksforGeeks/
+│   ├── CodeChef/
+│   └── HackerRank/
+│
+└── README.md
+```
 
+---
 
+# 📚 Topics Covered
 
+## 🟢 Fundamental Data Structures
 
+### 📌 Arrays
+- Traversal
+- Prefix Sum
+- Sliding Window
+- Two Pointer Technique
+- Kadane's Algorithm
+- Matrix Problems
 
+### 📌 Strings
+- String Manipulation
+- Hashing
+- Pattern Matching
+- Palindrome Problems
 
+### 📌 Linked Lists
+- Singly Linked List
+- Doubly Linked List
+- Circular Linked List
+- Fast & Slow Pointer
+- Reversal Techniques
 
+### 📌 Stacks
+- Stack using Arrays
+- Stack using Linked List
+- Monotonic Stack
+- Expression Evaluation
+- Next Greater Element
 
+### 📌 Queues
+- Queue
+- Circular Queue
+- Deque
+- Priority Queue
 
+---
 
-📋 Topics Covered:
-Here are the key areas implemented and practiced within this repository:1. Fundamental Data StructuresArrays & Vectors: Multi-dimensional tracking, sliding window techniques, two-pointer methods.Linked Lists: Singly, Doubly, and Circular Linked Lists; pointer manipulation workflows.Stacks & Queues: Implementations using arrays/linked lists, monotonic stacks, priority queues.2. Advanced Data StructuresTrees: Binary Trees, Binary Search Trees (BST), AVL Trees, and various traversals (Inorder, Preorder, Postorder, Level-order).Graphs: Adjacency matrix/list representations, BFS, DFS, and shortest-path models.3. Core AlgorithmsSorting & Searching: Binary Search variants, Quick Sort, Merge Sort, and Heap Sort.Dynamic Programming (DP): Memoization vs. Tabulation approaches to optimization problems.Greedy Strategy: Interval scheduling, fractional knapsack, and decision-tree logic.💻 Getting StartedPrerequisitesMake sure you have an appropriate compiler or runtime environment installed for your selected programming language:Bash# Example for C++ (GCC Compiler)
-gcc --version
+## 🌳 Trees
 
-# Example for Python
-python --version
-InstallationClone this repository locally to explore or run the code batches:Bashgit clone [https://github.com/KVRPavanShanmukh/DSA-BY-SPS.git](https://github.com/KVRPavanShanmukh/DSA-BY-SPS.git)
+- Binary Tree
+- Binary Search Tree (BST)
+- AVL Tree
+- Tree Traversals
+  - Inorder
+  - Preorder
+  - Postorder
+  - Level Order
+- Lowest Common Ancestor (LCA)
+- Tree Views
+- Diameter
+- Balanced Trees
+
+---
+
+## 🌐 Graphs
+
+- Graph Representation
+  - Adjacency Matrix
+  - Adjacency List
+- BFS
+- DFS
+- Connected Components
+- Topological Sort
+- Shortest Path
+- Minimum Spanning Tree
+- Disjoint Set Union (DSU)
+
+---
+
+## ⚙️ Algorithms
+
+### 🔍 Searching
+- Linear Search
+- Binary Search
+- Binary Search on Answers
+
+### 🔃 Sorting
+- Bubble Sort
+- Selection Sort
+- Insertion Sort
+- Merge Sort
+- Quick Sort
+- Heap Sort
+
+### 🔁 Recursion & Backtracking
+- Subsequences
+- Subsets
+- Combination Sum
+- N-Queens
+- Sudoku Solver
+
+### ⚡ Dynamic Programming
+- Memoization
+- Tabulation
+- Space Optimization
+- Classic DP Problems
+
+### 🎯 Greedy Algorithms
+- Activity Selection
+- Fractional Knapsack
+- Job Sequencing
+- Interval Problems
+
+---
+
+## 💻 Competitive Programming
+
+Solutions from:
+
+- LeetCode
+- GeeksforGeeks
+- CodeChef
+- HackerRank
+
+Each solution includes:
+
+- Problem Statement
+- Approach
+- Time Complexity
+- Space Complexity
+- Java Implementation
+
+---
+
+# 🚀 Getting Started
+
+## Prerequisites
+
+Make sure you have Java installed.
+
+```bash
+java --version
+javac --version
+```
+
+---
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/KVRPavanShanmukh/DSA-BY-SPS.git
+
 cd DSA-BY-SPS
-📈 Goals & ContributionsConsistency: Daily or weekly additions of newly solved problems.Optimization: Refining existing solutions for better Time and Space Complexities ($O(1)$ space, $O(\log n)$ runtime, etc.).If you'd like to suggest optimizations or add cleaner variations to a problem, feel free to fork the repository and open a Pull Request!👤 Profile & ConnectCreated and maintained by K V R Pavan Shanmukh.
-### 💡 Quick Tips for Polish:
-1. **Repository Structure:** Adjust the folder list under `## 📂 Repository Structure` to display your exact project directories.
-2. **Languages:** Under `## 🛠️ Tech Stack & Languages`, update it to state the primary language you used (e.g., Java or C++). 
-3. **Badges:** If you want to make it even flashier, you can add dynamic badges from [Shields
+```
+
+---
+
+## Run Java Files
+
+Compile
+
+```bash
+javac FileName.java
+```
+
+Run
+
+```bash
+java FileName
+```
+
+---
+
+# 📈 Repository Goals
+
+- ✅ Solve DSA problems consistently.
+- ✅ Learn multiple approaches for every problem.
+- ✅ Optimize solutions for better Time & Space Complexity.
+- ✅ Cover all important interview topics.
+- ✅ Maintain clean, readable, and well-documented code.
+
+---
+
+# 🤝 Contributions
+
+Contributions are always welcome!
+
+If you have:
+
+- Better approaches
+- Cleaner implementations
+- Optimized solutions
+- Bug fixes
+
+Feel free to **Fork** the repository and submit a **Pull Request**.
+
+---
+
+# ⭐ Support
+
+If you find this repository helpful:
+
+- ⭐ Star the repository
+- 🍴 Fork it
+- 📢 Share it with others
+
+Your support motivates me to keep improving and adding more content.
+
+---
+
+# 👨‍💻 Author
+
+**K V R Pavan Shanmukh**
+
+- GitHub: https://github.com/KVRPavanShanmukh
+
+---
+
+## 📌 Future Plans
+
+- Complete Striver's A2Z DSA Sheet
+- Complete LeetCode Top Interview 150
+- Add System Design Notes
+- Add Interview Experiences
+- Add Complexity Analysis for every problem
+- Add Visual Explanations wherever possible
+
+---
+
+## 📄 License
+
+This repository is intended for educational purposes. Feel free to use the code for learning and interview preparation.
