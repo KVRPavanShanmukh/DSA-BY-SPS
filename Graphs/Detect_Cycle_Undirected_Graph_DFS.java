@@ -54,8 +54,8 @@ public class Detect_Cycle_Undirected_Graph_DFS {
 
         Solution sol = new Solution();
         if (sol.isCycle(V, adj)) {
-            System.out.println("Cycle detected"); 
-        }else {
+            System.out.println("Cycle detected");
+        } else {
             System.out.println("No cycle found");
         }
     }

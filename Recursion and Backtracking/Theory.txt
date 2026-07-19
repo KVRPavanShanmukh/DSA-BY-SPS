@@ -1,0 +1,324 @@
+The Master Backtracking Template:
+You can solve almost every backtracking problem with this:
+
+solve(state){
+    if(answer formed){
+        save answer
+        return
+    }
+
+    for(each possible choice){
+        if(choice is valid){
+            make choice
+            solve(next state)
+            undo choice
+        }
+    }
+}
+
+Now map it to problems:
+
+| Problem        | State        | Choices               |
+| -------------- | ------------ | --------------------- |
+| Subsequences   | index        | Pick / Skip           |
+| Binary Strings | position     | 0 / 1                 |
+| N Queens       | row          | Every column          |
+| Permutations   | index        | Every unused element  |
+| Sudoku         | empty cell   | Digits 1–9            |
+| Rat in Maze    | current cell | Up, Down, Left, Right |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What is a Subsequence?
+
+A subsequence is obtained by choosing or skipping each element while maintaining the original order.
+
+Example:
+
+Array: [1, 2, 3]
+
+Subsequences:
+
+[]
+[1]
+[2]
+[3]
+[1,2]
+[1,3]
+[2,3]
+[1,2,3]
+
+Notice:
+
+Order is maintained.
+Elements need not be contiguous.
+Total Number of Subsequences
+
+For an array of size n:
+
+2^n
+
+Reason:
+
+Each element has 2 choices:
+
+Take
+Don't take
+
+So,
+
+2 × 2 × 2 ... (n times)
+
+= 2^n
+Generic Recursion Template
+
+At every index:
+
+          index i
+         /       \
+      Take      Don't Take
+
+Code skeleton:
+
+solve(i):
+
+    if(i == n){
+        process answer
+        return;
+    }
+
+    // Take
+    add(arr[i]);
+    solve(i+1);
+
+    // Backtrack
+    remove last element;
+
+    // Don't Take
+    solve(i+1);
+Backtracking
+
+Always remember:
+
+Choose
+Explore
+Unchoose
+
+Example:
+
+ls.add(arr[i]);
+
+solve(i+1);
+
+ls.remove(ls.size()-1);
+Common Problems
+1. Print All Subsequences
+Input:
+1 2 3
+
+Output:
+[]
+[1]
+[2]
+[3]
+[1,2]
+[1,3]
+[2,3]
+[1,2,3]
+2. Print Subsequences with Sum = K
+
+Base case:
+
+if(sum == k)
+    print
+3. Print Only One Valid Subsequence
+
+Instead of void, return boolean.
+
+If left recursion returns true
+    stop
+
+Else
+    try right recursion
+4. Count Subsequences
+
+Instead of printing:
+
+return leftCount + rightCount;
+Pick / Not Pick Pattern
+solve(i)
+
+        i
+      /   \
+   Pick   Not Pick
+
+Almost every subsequence problem follows this.
+
+Important Base Case
+if(i == n){
+    // Process answer
+    return;
+}
+
+Never access:
+
+arr[i]
+
+after
+
+i == n
+Time Complexity
+
+Number of recursive calls:
+
+O(2^n)
+
+Space:
+
+O(n)
+
+because recursion depth is at most n.
+
+Difference Between Problems
+Subsequence
+Take / Don't Take
+Subset
+
+Same as subsequence for arrays with unique elements.
+
+Combination Sum I
+Take
+↓
+Stay at same index
+solve(i, target-arr[i])
+
+because elements can be reused.
+
+Combination Sum II
+Take
+↓
+Move to next index
+solve(i+1, target-arr[i])
+
+because each element is used only once.
+
+Generate Parentheses
+
+Not a Take/Don't Take problem.
+
+Choices are:
+
+Add '('
+Add ')'
+
+subject to:
+
+open < n
+close < open
+Permutations
+
+Not Take/Don't Take.
+
+Choose one unused element at each level.
+
+Recognition Guide
+
+If the problem says:
+
+Print all possibilities
+Find every combination
+Count all ways
+Choose elements
+
+Think:
+
+Subsequence recursion (Take / Don't Take)
+
+If it says:
+
+Arrange elements
+
+Think:
+
+Permutation
+
+If it says:
+
+Use each element once
+
+Think:
+
+Move to i + 1
+
+If it says:
+
+Reuse elements
+
+Think:
+
+Stay at i
+
+Master Template
+void solve(int i){
+
+    if(i == n){
+        // answer
+        return;
+    }
+
+    // Take
+    pick(arr[i]);
+
+    solve(i+1);
+
+    unpick(arr[i]);
+
+    // Don't Take
+    solve(i+1);
+}
+
+
+
+
+
+
+Now,
+One important note
+
+There are two common ways to generate a Power Set:
+
+Method 1: Pick / Don't Pick (the one you've learned)
+Take
+Don't Take
+
+This is the standard subsequence recursion pattern and is excellent for learning recursion.
+
+Method 2: Loop + Backtracking
+At every index,
+start a loop,
+choose one element,
+recurse,
+backtrack.

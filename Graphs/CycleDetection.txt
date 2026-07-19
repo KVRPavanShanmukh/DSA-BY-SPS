@@ -4,3 +4,7 @@
 | Store `(node, parent)` in queue   | Pass `parent` as a parameter      |
 | Pop from queue                    | Recursive call                    |
 | If visited and not parent → Cycle | If visited and not parent → Cycle |
+
+
+
+A GRPAH will have a CYCLE if any of its COMPONENTS have CYCLE!
