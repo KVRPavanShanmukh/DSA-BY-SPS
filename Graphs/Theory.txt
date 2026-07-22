@@ -121,3 +121,166 @@ MST (Prim & Kruskal)
 DSU
         ↓
 Advanced Graphs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Memorize these 5 lines.
+
+Whenever you open a grid question:
+
+1. What is a node?
+
+A cell.
+2. Neighbours?
+
+4 or 8 directions?
+3. Start from?
+
+One cell?
+
+Every cell?
+
+Boundary?
+
+Multiple sources?
+4. When to stop?
+
+Boundary
+
+Visited
+
+Invalid cell
+5. What is answer?
+
+Count?
+
+Minutes?
+
+Area?
+
+Replace?
+
+Distance?
+
+If you answer these 5 questions, 80% of grid problems are solved.
+
+There are only 6 grid patterns.
+
+You don't need 100 algorithms.
+
+Pattern 1
+
+Single Source DFS
+
+Flood Fill
+Pattern 2
+
+Connected Components
+
+Number of Islands
+Pattern 3
+
+Boundary DFS
+
+Surrounded Regions
+Number of Enclaves
+Pattern 4
+
+Multi Source BFS
+
+Rotting Oranges
+01 Matrix
+Walls and Gates
+Pattern 5
+
+Shortest Path BFS
+
+Binary Matrix
+Maze
+Pattern 6
+
+Backtracking
+
+Word Search
+Unique Paths III
+
+That's literally almost every famous grid question.
+
+Stop writing neighbour code every time.
+
+I always write this first.
+
+int[] dr = {-1, 1, 0, 0};
+int[] dc = {0, 0, -1, 1};
+
+Then
+
+for (int k = 0; k < 4; k++) {
+    int nr = row + dr[k];
+    int nc = col + dc[k];
+}
+
+You'll use this in almost every 4-direction grid problem.
+
+For 8-direction movement:
+
+int[] dr = {-1,-1,-1,0,0,1,1,1};
+int[] dc = {-1,0,1,-1,1,-1,0,1};
+
+Never memorize neighbour code separately again.
+
+My advice for you
+
+From our conversations, I've noticed something important:
+
+Your graph concepts are actually good.
+
+Where you get stuck is translating the idea into code.
+
+For example:
+
+You understood Connected Components.
+You understood Number of Islands.
+You understood Rotten Oranges after discussing BFS levels.
+You recognized that Number of Enclaves is a Boundary BFS problem.
+
+The bottleneck isn't the algorithm—it's writing the implementation confidently.
+
+Here's a 7-day challenge
+
+Don't solve 50 random grid problems. Solve these in order:
+
+Flood Fill
+Number of Islands
+Max Area of Island
+Number of Enclaves
+Surrounded Regions
+Rotting Oranges
+01 Matrix
+
+Each day, before writing any code, answer these five questions:
+
+What is my node?
+Who are the neighbours?
+Where do I start?
+When do I stop?
+What is the answer?
