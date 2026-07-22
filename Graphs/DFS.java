@@ -15,8 +15,8 @@ For every neighbour
 public class DFS {
 
     public void DepthFirstSearch(int node, ArrayList<ArrayList<Integer>> als, boolean[] visitedNodes) {
-        visitedNodes[node] = true;
         //as we start from here, we already visited it
+        visitedNodes[node] = true;
 
         //print the nodes as Only one node will be printed for each func call.
         System.out.print(node + " ");
