@@ -44,7 +44,7 @@ public class ConnectedComponents extends DFS {
 
         int components = cc.ConnectedComponentsInAGraph(als, v, visitedNodes);
 
-        System.out.println("BFS is : ");
+        System.out.println("Number of Connected Components : ");
         System.out.println(components);
     }
 }
