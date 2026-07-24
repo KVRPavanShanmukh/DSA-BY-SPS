@@ -284,3 +284,186 @@ Who are the neighbours?
 Where do I start?
 When do I stop?
 What is the answer?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Here's how experts think
+They don't start coding.
+They ask questions.
+
+For every graph problem, ask these questions in order.
+Step 1: What is the graph?
+Ask yourself:
+What is a node?
+What is an edge?
+
+Example:
+Course Schedule
+Node = Course
+Edge = prerequisite
+Eventual Safe States
+Node = Vertex
+Edge = Directed Edge
+Flood Fill
+Node = Cell
+Edge = Up Down Left Right
+Number of Islands
+Node = Land Cell
+Edge = Adjacent Land
+
+
+Step 2: What is the question REALLY asking?
+Not the wording.
+The actual graph problem.
+
+Examples
+"Number of Islands"
+↓
+How many connected components?
+Course Schedule
+↓
+Is there a cycle?
+Surrounded Regions
+↓
+Which nodes are reachable from boundary?
+Rotting Oranges
+↓
+Minimum distance from multiple sources
+Eventual Safe States
+↓
+Which nodes never reach a cycle?
+
+Step 3: Does the graph change?
+Sometimes
+YES
+
+Sometimes
+NO
+
+Example
+Flood Fill
+Color changes
+Surrounded Regions
+Mark safe nodes
+Number of Islands
+Visited changes
+
+
+Step 4: Which pattern fits?
+This is the biggest step.
+I don't see
+Eventual Safe States
+I see
+Reverse Graph+Kahn+Sort
+
+I don't see : Course Schedule
+I see : Topo Sort+Cycle Detection
+
+I don't see:Rotting Oranges
+I see:
+Multi Source BFS
+Build a Pattern Library
+
+Instead of memorizing 100 questions...
+Memorize 15 patterns.
+
+Like this:
+
+Connected Components
+│
+├── Number of Provinces
+├── Number of Islands
+├── Number of Enclaves
+└── Count Components
+Multi Source BFS
+│
+├── Rotting Oranges
+├── Walls and Gates
+├── Fire Spread
+└── Distance Problems
+Cycle Detection
+│
+├── Course Schedule
+├── Detect Cycle
+├── Alien Dictionary
+└── Topological Questions
+Boundary DFS
+│
+├── Surrounded Regions
+├── Number of Enclaves
+└── Pacific Atlantic
+Reverse Graph
+│
+├── Eventual Safe States
+└── SCC Problems
+
+Notice something?
+Five patterns solve around 30 problems.
+
+
+Step 5: Write only the skeleton
+Before coding, write:
+Build graph
+↓
+Find indegree
+↓
+Queue indegree 0
+↓
+Run BFS
+↓
+Collect answer
+
+
+Just write English.
+
+What I noticed about you
+When we solved Number of Provinces, you couldn't identify it.
+Now?
+You immediately say "This looks like Connected Components."
+
+That's growth.
+When we did Rotting Oranges,
+You first thought DFS.
+
+Now you immediately know
+BFS.
+
+Again, growth.
+
+Today,
+You looked at Eventual Safe States and said
+Reverse Graph?
+That means your brain is already recognizing patterns.
+You're improving.
+Here's the exercise I want you to follow from now on
+Whenever you open a new graph problem, don't touch the keyboard for 5 minutes.
+
+Answer these 6 questions:
+1. What is the node?
+2. What is the edge?
+3. Directed or Undirected?
+4. Which existing pattern does this resemble?
+5. DFS or BFS or Topo?
+6. What data structure do I need?
+
+Only after answering those questions should you start coding.
