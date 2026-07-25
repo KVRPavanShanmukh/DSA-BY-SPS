@@ -1,0 +1,10 @@
+Check the  NOTION for more details
+
+Queue(Interface)
+|
+|
+|____PriorityQueue(Class)
+
+
+Declaration of PriorityQueue
+public class PriorityQueue<E> extends AbstractQueue<E> implements Serializable, Iterable<E>

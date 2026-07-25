@@ -46,6 +46,9 @@ public class Detect_Cycle_Undirected_Graph_BFS {
         boolean[] visited = new boolean[V];
         for (int i = 0; i < V; i++) {
             if (!visited[i]) {
+                //if the vertex is not visited, start detecting cycle from that vertex.
+                //if there is a cycle, return true. else, return false.
+                
                 if (detectCycle(i, adj, visited)) {
                     return true;
                 }

@@ -15,6 +15,7 @@ to be ‘0’. If a vertex is unreachable from the source node, then return -1 f
 public class ShortestPath_UndirGraphs {
 
     public int[] ShortestPath_UNDIR_GRAPH(int V, List<List<Integer>> als, int Source) {
+        //No initial distances
         int[] dist = new int[V];
         Arrays.fill(dist, -1);
 
@@ -27,6 +28,7 @@ public class ShortestPath_UndirGraphs {
 
             for (int i : als.get(curr)) {
                 if (dist[i] == -1) {
+                    //change the dist of curr vertex and add it into q.
                     dist[i] = dist[curr] + 1;
                     q.add(i);
                 }
