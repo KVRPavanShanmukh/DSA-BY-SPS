@@ -1,18 +1,15 @@
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-
 /* 
 Idea: Visit all immediate neighbors first, then their neighbors, and so on.
-
 You will need:
 Queue
 visited[] array
-
  */
+
 public class BFS {
 
     public void BreadthFirstSearch(int node, Queue<Integer> q, ArrayList<ArrayList<Integer>> als, boolean[] visitedNodes) {
