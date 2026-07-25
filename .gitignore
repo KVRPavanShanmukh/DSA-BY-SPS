@@ -1,0 +1,72 @@
+# =========================
+# Ignore specific folders
+# =========================
+Podcasts/
+temp/
+logs/
+build/
+dist/
+bin/
+out/
+
+# Example
+# secret_files/
+# uploads/
+
+# =========================
+# Ignore specific files
+# =========================
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# =========================
+# Ignore all files of a type
+# =========================
+# *.log
+# *.tmp
+# *.bak
+# *.cache
+# *.class
+# *.jar
+# *.war
+# *.zip
+# *.rar
+
+# =========================
+# IDE Files
+# =========================
+# .vscode/
+# .idea/
+# *.iml
+
+# =========================
+# OS Files
+# =========================
+# .DS_Store
+# Thumbs.db
+
+# =========================
+# Java
+# =========================
+# target/
+# *.class
+
+# =========================
+# Node.js
+# =========================
+# node_modules/
+
+# =========================
+# Python
+# =========================
+# __pycache__/
+# *.pyc
+
+# =========================
+# Ignore everything inside a folder
+# except one file
+# =========================
+# folder_name/*
+# !folder_name/README.md

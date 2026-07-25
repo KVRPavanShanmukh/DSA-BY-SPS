@@ -1,5 +1,6 @@
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
@@ -29,16 +30,32 @@ public class Priority_Queue implements Serializable {
         System.out.println("Peek element is : " + pqI.peek());
         System.out.println("Peek element is : " + pqS.peek());
 
-        //Remove method
-        //boolean -> not a correct way to remove last ele
+        /*
+        Remove method
+        boolean -> not a correct way to remove last ele
+        remove and poll both does same, but return diff values when queue is empty.
+        remove --> java.util.NoSuchElementException
+        poll --> null
+         */
         System.out.println("The ele in the top priority gets removed i.e : " + pqI.remove());
-
+        System.out.println("The ele in the top priority gets removed i.e : " + pqI.poll());
 
         //Iterating using Iterator Interface as it is implemented by PriorityQueue.
         Iterator<Integer> i = pqI.iterator();
-        while(i.hasNext()){
-            System.out.print(i.next()+" ");
-        } 
+        while (i.hasNext()) {
+            System.out.print(i.next() + " ");
+        }
 
+        // Create a Max-Heap priority queue
+        PriorityQueue<Integer> pqMax = new PriorityQueue<>(Comparator.reverseOrder());
+        pqMax.add(10);
+        pqMax.add(5);
+        pqMax.add(20);
+        pqMax.add(15);
+        System.out.println("Top element (max): " + pqMax.peek()); // 20
+
+        // Polling (removing the top element)
+        System.out.println("Removed element: " + pqMax.poll()); // 20
+        System.out.println("Top element (after poll): " + pqMax.peek()); // 15
     }
 }
