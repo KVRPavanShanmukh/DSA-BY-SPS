@@ -62,12 +62,12 @@ public class ShortestPath_UndirGraphs {
 
         ShortestPath_UndirGraphs spud = new ShortestPath_UndirGraphs();
         int ans[] = spud.ShortestPath_UNDIR_GRAPH(v, als, Source);
+
         System.out.print("The Shortest Path from source to each node is : ");
         for (int i : ans) {
             System.out.print(i + " ");
         }
         System.out.println();
-
         s.close();
     }
 }
