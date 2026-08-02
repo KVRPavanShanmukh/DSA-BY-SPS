@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 /* 
 Idea: Visit all immediate neighbors first, then their neighbors, and so on.

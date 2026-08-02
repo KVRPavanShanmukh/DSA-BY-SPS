@@ -2,12 +2,11 @@
 public class FloodFill {
     public int[][] floodFill(int[][] a, int sr, int sc, int c) {
         int og = a[sr][sc];
-
+        
         if (og != c) {
             dfs(a, sr, sc, og, c);
         }
         return a;
-
     }
 
     void dfs(int a[][], int r, int c, int og, int col) {

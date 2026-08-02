@@ -10,9 +10,10 @@ public class Read_Graph_As_ListOfLists_And_Edge_Weigths {
         int n = s.nextInt();
         System.out.println("Enter number of Edges in Graph : ");
         int m = s.nextInt();
-        //Adjacency List:
-        // List<List<Integer>> ls = new ArrayList<>();
         /*
+        Adjacency List:
+        List<List<Integer>> ls = new ArrayList<>();
+        
         Hence, we stored all the neighbors in the particular indexes. In this representation,
         for an undirected graph, each edge data appears twice. For example, nodes 1 and 2 are
         adjacent hence node 2 appears in the list of node 1, and node 1 appears in the list of
@@ -37,20 +38,21 @@ public class Read_Graph_As_ListOfLists_And_Edge_Weigths {
             als[v].add(u);
         }
 
-        // For Directed Graphs:
-        // ArrayList<Integer>[] dals = new ArrayList[n + 1];
-        // for (int i = 0; i <= n; i++) {
-        //     dals[i] = new ArrayList<>();
-        // }
+        /*For Directed Graphs:
+        ArrayList<Integer>[] dals = new ArrayList[n + 1];
+        for (int i = 0; i <= n; i++) {
+            dals[i] = new ArrayList<>();
+        }
 
-        // for (int i = 0; i < m; i++) {
-        //     int u = s.nextInt();
-        //     int v = s.nextInt();
+        for (int i = 0; i < m; i++) {
+            int u = s.nextInt();
+            int v = s.nextInt();
 
-        //     dals[u].add(v);
-        //     dals[v].add(u);
-        // }
-
+            dals[u].add(v);
+            dals[v].add(u);
+        }
+         */
+        
         // To read as List of Lists:
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         System.out.println("Enter number of Nodes in Graph : ");

@@ -9,16 +9,29 @@ class Is_Bipartite_GRIDMethod {
         color[node] = col;
 
         for (int neighbour = 0; neighbour < graph.length; neighbour++) {
+            //if node has neighbor
             if (graph[node][neighbour] == 1) {
+                // If the neighbour has not been colored yet, assign it the opposite color.
                 if (color[neighbour] == -1) {
+                    /*
+                        Color the neighbour with the opposite color.
+                        If any conflict is found during the DFS traversal,
+                        the graph cannot be bipartite, so return false.
+                     */
                     if (!dfs(neighbour, 1 - col, color, graph)) {
                         return false;
                     }
+
+                    /*
+                        The neighbour is already colored with the current node's color.
+                        Adjacent vertices must have different colors, so the graph is not bipartite.
+                     */
                 } else if (color[neighbour] == col) {
                     return false;
                 }
             }
         }
+        //In all other cases, we return true.
         return true;
     }
 
