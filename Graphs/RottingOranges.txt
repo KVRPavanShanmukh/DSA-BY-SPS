@@ -2,11 +2,11 @@ Don't memorize any code.
 Instead, remember this pattern:
 
 Scan Grid
-↓
+    ↓
 Push all sources into Queue
-↓
+    ↓
 Count targets
-↓
+    ↓
 while(queue not empty){
     size = queue.size()
     process one level

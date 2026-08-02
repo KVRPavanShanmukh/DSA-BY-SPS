@@ -1,17 +1,11 @@
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Scanner;
-
+import java.util.*;
 /* 
 Problem Statement:
 Given an Undirected Graph having unit edge weight, find the shortest path from the source to
 all other nodes in this graph. In this problem statement, we have assumed the source vertex
 to be ‘0’. If a vertex is unreachable from the source node, then return -1 for that vertex.
  */
+
 public class ShortestPath_UndirGraphs {
 
     public int[] ShortestPath_UNDIR_GRAPH(int V, List<List<Integer>> als, int Source) {

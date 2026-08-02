@@ -1,11 +1,10 @@
 /*
-
 Companies asked:
  Amazon ✯   Microsoft ✯   Facebook ✯   Bloomberg ✯   Google ✯   LinkedIn   Apple   Oracle   Uber   Salesforce   ByteDance   tiktok   DoorDash   Docusign   SAP   Karat   Adobe   Qualtrics   Goldman Sachs   Paypal   Nvidia   VMware   ServiceNow   Shopee   eBay   Snapchat   Dropbox   Square   Twitch   Cruise Automation   Yandex   Tesla   Samsung   Siemens   turing   Yahoo   Walmart Labs   Disney   Citadel   Snowflake   Ozon  
 
- Ques:
- Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the
- number of islands.
+Ques:
+Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the
+number of islands.
 An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
 You may assume all four edges of the grid are all surrounded by water.
 
@@ -36,8 +35,7 @@ public class NumberOfIslands {
 
     public void dfs(int row, int col, char[][] grid, boolean[][] visited) {
         // Boundary Check
-        if (row < 0 || row >= grid.length
-                || col < 0 || col >= grid[0].length) {
+        if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length) {
             return;
         }
 
@@ -83,7 +81,7 @@ public class NumberOfIslands {
         int cols = s.nextInt();
 
         char[][] grid = new char[rows][cols];
-        System.out.println("Enter Grid (0/1):");
+        System.out.println("Enter Grid (0 or 1) : ");
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -94,6 +92,7 @@ public class NumberOfIslands {
         NumberOfIslands noi = new NumberOfIslands();
         int islands = noi.numIslands(grid);
         System.out.println("Number of Islands : " + islands);
+        s.close();
     }
 }
 
@@ -156,4 +155,4 @@ Pacific Atlantic Water Flow
 
 Once you realize every cell is a node and adjacent cells are neighbours, these problems become much easier.
 
-*/
+ */
