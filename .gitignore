@@ -9,15 +9,13 @@ dist/
 bin/
 out/
 
-# =========================
-# Ignore specific files
-# =========================
-*.png
+
+# *.png
 *.jpg
 *.jpeg
 *.webp
-# *.txt
 *.pdf
+*.html
 
 # =========================
 # Ignore all files of a type
