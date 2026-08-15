@@ -6,7 +6,7 @@ public class Fractional_Knapsack {
     public static void main(String[] args) {
         int n = 7;
         int m = 15;
-        int object[] = {1, 2, 3, 4, 5, 6, 7};
+        // int object[] = {1, 2, 3, 4, 5, 6, 7}; commented as this is common input!
         int profit[] = {10, 5, 15, 7, 6, 18, 3};
         int weight[] = {2, 3, 5, 7, 1, 4, 1};
 
