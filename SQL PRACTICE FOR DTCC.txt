@@ -1,0 +1,306 @@
+L1:
+	Q1:
+	with high_salary as(
+			select e.name,e.salary,e.department as sal
+			from employees e
+			where sal > 70000
+	)
+	select * from high_salary;
+
+
+	Q2:
+	with it_employees as (
+		select e.name,e.salary,e.department
+		from employees e
+		where department = 'IT' and salary > 70000
+	)
+	select * from it_employees;
+
+L2:
+	Q3:
+	with dept_stats as (
+		select e.department,avg(salary) as avg_salary
+		from employees e
+		group by e.department
+	)
+	select * from dept_stats;
+
+
+	Q4:
+	with dept_stats as (
+		select department,avg(salary) as avg_salary
+		from employees
+		group by department
+	),
+
+	select * from avgsal
+	where avg_salary > 70000;
+
+L3:
+	Q5:
+	with avgsal as (
+		select department,
+		avg(salary) as avg_salary
+		from employees
+		group by department
+	)
+	select e.name,e.department,e.salary,
+	a.avg_salary 
+	from employees e 
+	join avgsal a on e.department = a.department
+	where e.salary > a.avg_salary;
+	
+	Q6:
+	with dept_avg as (
+		select e.department,
+		avg(e.salary) as avg_salary
+		from employees e
+		group by department
+	),
+	
+	high_salary as (
+		select name,department,salary
+		from employees
+		where salary > 60000
+	)
+	
+	select hs.name,hs.department,hs.salary,
+	da.avg_salary
+	from high_salary hs
+	join dept_avg da on da.department = hs.department;
+	
+	Q7:
+	with highest_salary as (
+		select max(salary) as max_salary,
+		department
+		from employees
+		group by department
+	)
+	
+	select e.name,e.department,e.salary
+	from highest_salary hs
+	join employees e
+	on e.department = hs.departmen
+	and e.salary = hs.max_salary;
+	
+	
+	Q8:
+	with avgsal as(
+		select department,avg(salary) as avg_salary
+		from employees
+		group by department
+	)
+	select department,avg_salary
+	from avgsal
+	where avg_salary = (
+		select max(avg_salary)
+		from avgsal
+	);
+
+L4:
+	Q9:
+	with avgsal as (
+		select avg(salary) as avg_salary from employees
+	)
+	
+	select e.name,e.department,e.salary
+	from employees e
+	cross join avgsal a
+	where e.salary > a.avg_salary;
+	
+	(or)
+	
+	with avgsal as (
+		select avg(salary) as avg_salary from employees
+	)
+	
+	select e.name,e.department,e.salary
+	from employees e
+	where salary > (
+	select avg_salary from avgsal
+	)
+	
+	
+	Q10:
+	with dept_employees as (
+		select name,salary,department
+		from employees
+		where salary > 60000
+	)
+	
+	select count(*) as emp,
+	department from dept_employees
+	group by department
+	having count(*) >= 2;
+	
+	
+RECURSIVE CTE:
+	Basic Structure:
+		Q1,2:
+		WITH RECURSIVE employee_tree AS (
+		
+		-- Anchor: start with CEO
+		SELECT id,name,0 as level
+		FROM employees
+		WHERE name = 'CEO'
+
+		UNION ALL
+
+		-- Recursive part: find employees under them
+		SELECT e.id,e.name,et.level + 1
+		FROM employees e
+		JOIN employee_tree et
+			ON e.manager_id = et.id
+		)
+
+		SELECT *
+		FROM employee_tree;
+		
+		
+		Q3:
+		with recursive employee_tree as (
+			select id,name,0 as level
+			from employees
+			where name = 'CEO'
+			
+			union all
+			
+			select e.id,e.name,et.level+1
+			from employees e
+			join employee_tree et
+			on e.manager_id = et.id
+		)
+		select * from employee_tree
+		where level > 0;
+		
+		
+		Q4:
+		with recursive employee_tree as (
+			select id,name,0 as level
+			from employees
+			where name = 'Ravi'
+			
+			union all
+			
+			select e.id,e.name,et.level+1
+			from employees e
+			join employee_tree et
+			on e.manager_id = et.id
+		)
+		
+		select * from employee_tree
+		where level > 0;
+		
+		
+		Q5:
+		with recursive employee_tree as (
+			select id,name,0 as level
+			from employees
+			where name = 'Arun'
+			
+			union all
+			
+			select e.id,e.name,et.level + 1
+			from employees e
+			join employee_tree et
+			on e.id = et.manager_id			
+		)
+		select * from employee_tree;
+		
+		
+		Q6:
+		with recursive employee_tree as (
+			select id,name from employees
+			where name = 'CEO'
+			
+			union all
+			
+			select e.id,e.name from
+			employees e
+			join employee_tree et
+			on e.manager_id = et.id
+		)
+		select * from employee_tree;
+		
+		
+WINDOW FUNCTIONS:
+	Basic Structure:
+	
+	FUNCTION() OVER (
+		PARTITION BY ...
+		ORDER BY ...
+	)
+	
+	ROW_NUMBER(),RANK(),DENSE_RANK()	
+	
+		Q1:
+		select name,department,salary,
+		row_number() over (
+			partition by department
+			order by salary desc
+		) as rn
+		from employees;
+		
+		
+		Q2:
+		select name,department,salary,
+		rank() over (
+			partition by department
+			order by salary desc
+		) as rn
+		from employees;
+		
+		ranks look like : 1 2 2 4
+		
+		
+		Q3:
+		select name,department,salary,
+		dense_rank() over (
+			partition by department
+			order by salary desc
+		) as rn
+		from employees;
+		
+		ranks look like : 1 2 2 3
+		
+		
+		Q4:
+		with highest_paid as (
+			select name,department,salary,
+			rank() over (
+				partition by department
+				order by salary desc
+			) as rn
+			from employees
+		)
+		
+		select name,department,salary
+		from highest_paid
+		where rn = 1;
+		
+		
+	RUNNING SUM:
+	Syntax:
+		SUM(sales) OVER (
+		ORDER BY date
+		) AS running_total
+		
+		Order by date is more important
+		
+		
+		Q5:
+		SUM(salary) over (
+			partition by department
+			order by date
+		) as running_salary
+		
+		Note:
+		partition is used so that the running
+		sum restarts for each department.
+		
+		
+		Q6:
+		select day,sales,
+		sum(salary) over (
+			order by day
+		) as running_Sum
