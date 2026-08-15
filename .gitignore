@@ -9,10 +9,6 @@ dist/
 bin/
 out/
 
-# Example
-# secret_files/
-# uploads/
-
 # =========================
 # Ignore specific files
 # =========================
@@ -20,43 +16,45 @@ out/
 *.jpg
 *.jpeg
 *.webp
+*.txt
+*.pdf
 
 # =========================
 # Ignore all files of a type
 # =========================
-# *.log
-# *.tmp
-# *.bak
-# *.cache
-# *.class
-# *.jar
-# *.war
-# *.zip
-# *.rar
+*.log
+*.tmp
+*.bak
+*.cache
+*.class
+*.jar
+*.war
+*.zip
+*.rar
 
 # =========================
 # IDE Files
 # =========================
 # .vscode/
 # .idea/
-# *.iml
+*.iml
 
 # =========================
 # OS Files
 # =========================
-# .DS_Store
-# Thumbs.db
+.DS_Store
+Thumbs.db
 
 # =========================
 # Java
 # =========================
 # target/
-# *.class
+*.class
 
 # =========================
 # Node.js
 # =========================
-# node_modules/
+node_modules/
 
 # =========================
 # Python
