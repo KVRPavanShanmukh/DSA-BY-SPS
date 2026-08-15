@@ -1,0 +1,127 @@
+Check the  NOTION for more details
+
+Queue(Interface)
+|
+|
+|____PriorityQueue(Class)
+
+
+Declaration of PriorityQueue
+public class PriorityQueue<E> extends AbstractQueue<E> implements Serializable, Iterable<E>
+
+
+
+6. Common Use Cases for Priority Queue / Heap:
+Heap Sort: Sorting using Min-Heap or Max-Heap.
+Dijkstra's Algorithm: Finding the shortest path in a graph.
+Huffman Encoding: Data compression algorithm.
+Median of a Data Stream: Using two heaps to find the median.
+Kth Largest/Smallest Element in an Array: Using a Min-Heap or Max-Heap.
+Merge k Sorted Lists: Merging multiple sorted lists using a Min-Heap.
+7. Additional Tips:
+The PriorityQueue class is not thread-safe. If you need a thread-safe version, consider using PriorityBlockingQueue from java.util.concurrent.
+PriorityQueue is not fixed in size; it grows dynamically as needed.
+Heap operations (add, remove) take (O(log n)), but peek operation takes constant time (O(1)).
+This cheat sheet covers the basics of PriorityQueue and heap operations in Java. It helps with understanding how to implement heap-based data structures, solve problems like sorting, and manage priority-based data efficiently.
+
+
+
+
+| Data Structure       | Maintains Complete Order? | Smallest at Front? |
+| -------------------- | ------------------------- | ------------------ |
+| ArrayList            | ❌                         | ❌                  |
+| PriorityQueue (Heap) | ❌                         | ✅                  |
+| TreeSet              | ✅                         | ✅                  |
+| Sorted Array         | ✅                         | ✅                  |
+
+Your queue
+pqI.add(1);
+pqI.add(2);
+pqI.add(3);
+pqI.add(4);
+pqI.add(5);
+
+Internally, the heap looks like this:
+
+        1
+      /   \
+     2     3
+    / \
+   4   5
+
+Its array representation is
+
+[1, 2, 3, 4, 5]
+
+which happens to look sorted.
+
+Now suppose you insert
+
+pqI.add(0);
+Step 1
+
+New element goes at the last position.
+
+        1
+      /   \
+     2     3
+    / \   /
+   4   5 0
+
+Array
+
+[1,2,3,4,5,0]
+Step 2 (Heapify Up)
+
+Compare with parent (3).
+
+        1
+      /   \
+     2     0
+    / \   /
+   4   5 3
+
+Array
+
+[1,2,0,4,5,3]
+Step 3
+
+Compare with parent (1).
+
+        0
+      /   \
+     2     1
+    / \   /
+   4   5 3
+
+Array
+
+[0,2,1,4,5,3]
+
+Now the heap property is satisfied.
+
+Notice the array:
+
+[0,2,1,4,5,3]
+
+It is not sorted.
+
+
+Mental model:
+Think of a heap like this:
+
+        Minimum
+           |
+      /-----------\
+     Bigger     Bigger
+      |             |
+   Bigger        Bigger
+
+It does not care about ordering between siblings or cousins.
+
+It only guarantees:
+
+Parent <= Left Child
+Parent <= Right Child
+
+Nothing else.
