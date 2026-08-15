@@ -179,3 +179,132 @@ Because of Type Erasure, **you cannot do the following in Java**:
 1. **Instantiate a generic type:** `T obj = new T();` (Error: `T` doesn't exist at runtime)
 2. **Create generic arrays:** `T[] array = new T[10];` (Error)
 3. **Use `instanceof` with generics:** `if (obj instanceof List<String>)` (Error: At runtime, it's just `List`)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Because of Type Erasure, Java throws away generic type information at runtime. This means if you have a class `<T>`, the JVM has no idea what `T` actually is when the program runs.
+
+Because of this, you cannot do things like `new T()` or `new T[10]`.
+
+To bypass this limitation, we use a **Class Token** (`Class<T>`). By explicitly passing the `.class` of the type you want to work with, you give the JVM a physical object at runtime that represents the type. You can then use Java's **Reflection API** to create arrays and instantiate objects.
+
+Here are the two most common ways to use Class tokens to bypass Type Erasure.
+
+### 1. Creating Generic Arrays
+
+You cannot write `T[] array = new T[10];`. Instead, you pass `Class<T>` into the constructor and use `java.lang.reflect.Array.newInstance()`.
+
+```java
+import java.lang.reflect.Array;
+
+public class GenericArray<T> {
+    private T[] array;
+
+    // We pass Class<T> as a "token" so the class knows its type at runtime
+    @SuppressWarnings("unchecked")
+    public GenericArray(Class<T> type, int size) {
+        // array = new T[size]; // COMPILE ERROR: Generic array creation
+        
+        // SUCCESS: Using Reflection to create the array
+        this.array = (T[]) Array.newInstance(type, size);
+    }
+
+    public void set(int index, T value) {
+        array[index] = value;
+    }
+
+    public T get(int index) {
+        return array[index];
+    }
+
+    public static void main(String[] args) {
+        // We pass String.class as the token
+        GenericArray<String> stringArray = new GenericArray<>(String.class, 5);
+        stringArray.set(0, "Reflection");
+        System.out.println(stringArray.get(0));
+    }
+}
+
+```
+
+### 2. Instantiating Generic Objects
+
+You cannot write `T item = new T();`. Instead, you use the Class token to look up the default constructor and invoke it via reflection.
+
+```java
+public class GenericFactory<T> {
+    private Class<T> type;
+
+    public GenericFactory(Class<T> type) {
+        this.type = type;
+    }
+
+    // Creates a new instance of T using Reflection
+    public T createNewInstance() {
+        try {
+            // Tries to find a no-argument constructor and create an object
+            return type.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Cannot instantiate type: " + type.getName(), e);
+        }
+    }
+
+    public static void main(String[] args) {
+        // We pass StringBuilder.class as the token
+        GenericFactory<StringBuilder> factory = new GenericFactory<>(StringBuilder.class);
+        
+        // Successfully creates a new StringBuilder at runtime
+        StringBuilder sb = factory.createNewInstance();
+        sb.append("Created via Reflection!");
+        
+        System.out.println(sb.toString());
+    }
+}
+
+```
+
+### The "Super Type Token" Pattern (How Libraries Do It)
+
+If you've ever used JSON parsing libraries like Jackson or Gson, you might have wondered how they can deserialize a JSON string directly into a `List<User>` if the `List` forgets it holds `User`s at runtime.
+
+They bypass type erasure using an anonymous subclass. While Java erases types from *instances*, it **keeps generic types in the class signature itself**.
+
+```java
+// How libraries like Gson or Jackson capture erased types:
+TypeReference<List<String>> typeRef = new TypeReference<List<String>>() {};
+
+```
+
+By adding `{}` at the end, you are creating an anonymous subclass. Because it's a subclass, Java permanently compiles `List<String>` into the bytecode of that new anonymous class, allowing the library to read it back at runtime using `getClass().getGenericSuperclass()`.
