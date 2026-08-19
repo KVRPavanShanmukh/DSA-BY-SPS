@@ -1,0 +1,12 @@
+Check these to solve a DP problem:
+
+Asthadigbhandhanam Process:
+    Do I have overlapping subproblems and optimal substructure?
+    What is dp[i] telling me?
+    Define DP Expression.
+    Define Base Conditions.
+    Create a DP Table.
+    What is the answer variable?
+    Time and Space Complexities.
+    Space Optimization.
+
