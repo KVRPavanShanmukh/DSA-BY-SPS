@@ -19,40 +19,7 @@ class Pair {
 }
 
 public class MaxWidthOFBinaryTree {
-    //  public Node buildTree(Scanner s, int n) {
-    //         if (n == 0) {
-    //             return null;
-    //         }
-    //         int val = s.nextInt();
-//         if (val == -1) {
-//             return null;
-//         }
-//         Node root = new Node(val);
-//         Queue<Node> q = new LinkedList<>();
-//         q.add(root);
 
-//         int i = 1;
-//         while (i < n && !q.isEmpty()) {
-    //             Node curr = q.poll();
-    //             if (i < n) {
-    //                 val = s.nextInt();
-    //                 i++;
-    //                 if (val != -1) {
-    //                     curr.l = new Node(val);
-    //                     q.add(curr.l);
-    //                 }
-    //             }
-    //             if (i < n) {
-    //                 val = s.nextInt();
-    //                 i++;
-    //                 if (val != -1) {
-    //                     curr.r = new Node(val);
-    //                     q.add(curr.r);
-    //                 }
-    //             }
-    //         }
-    //         return root;
-    //     }
     public int Width(Node rt) {
         if (rt == null) {
             return 0;
