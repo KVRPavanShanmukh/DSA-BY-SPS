@@ -304,3 +304,109 @@ WINDOW FUNCTIONS:
 		sum(salary) over (
 			order by day
 		) as running_Sum
+		
+		
+		
+		
+		
+25th August:
+CTE Revision:
+Q1: Easy CTE
+employees
+
+id | name   | department | salary
+---+--------+------------+-------
+1  | Ravi   | IT         | 60000
+2  | Priya  | IT         | 80000
+3  | Arun   | IT         | 90000
+4  | Kiran  | HR         | 70000
+5  | Sneha  | HR         | 50000
+6  | Anu    | Sales      | 75000
+Question
+Using a CTE, find employees whose salary is greater than 70,000.
+
+Solution:
+	with emp as (
+		select * from employees
+		where salary > 70000
+	)
+	select * from emp;
+	
+Q2:
+Find the average salary of each department using a CTE.
+
+Expected:
+
+department | avg_salary
+-----------+-----------
+IT         | ...
+HR         | ...
+Sales      | ...
+
+Solution:
+	with avg_sal as (
+		select department, avg(salary) from employees
+		group by department
+	)
+	select * from avg_sal;
+	
+	
+Q3:
+Using the same employees table:
+Find departments whose average salary is greater than 70,000.
+Use a CTE.
+Take your time and write the complete query.
+
+Solution:
+	with hadAvg_sal as (
+		select departments,avg(salary)
+		as avgsal
+		from employees
+		group by department
+		having avg(salary) > 70000
+	)
+	select * from hadAvg_sal;
+	
+
+Q4:
+Tables:
+employees
+id | name | department | salary
+
+departments
+department | location
+
+Using a CTE, find employees whose salary is greater than their department's average salary.
+Return:
+name | department | salary
+
+Solution:
+	with cte as(
+		select department,avg(salary) as avg_sal
+		from employees
+		group by department
+	)
+	select e.name,e.department,e.salary
+	from employees e
+	join department ds
+	on ds.department = e.department
+	where e.salary > cte.avgsal;
+	
+Q5:
+Find employees whose salary is equal to the highest salary in their department.
+Use a CTE.
+Return:
+name | department | salary
+This time, use MAX(salary) in the CTE and join it back to employees.
+
+Solution:
+	with cte as (
+		select department,max(salary) as msalary
+		from employees
+		group by department
+	)
+	select e.name,e.department,e.salary
+	from employees e
+	join cte c
+	on e.department = d.department
+	where e.salary = c.salary;
