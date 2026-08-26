@@ -1,43 +1,146 @@
 # DSA-BY-SPS
 
-<p align="center">
-  <h1 align="center">DSA-BY-SPS</h1>
-  <p align="center">
-    <b>Data Structures & Algorithms using Java</b>
-  </p>
-  <p align="center">
-    A practical collection of Java implementations, problem-solving patterns, and DSA practice.
-  </p>
-</p>
+### Data Structures & Algorithms using Java
+
+[![Language](https://img.shields.io/badge/Language-Java-orange?style=for-the-badge\&logo=openjdk)](https://www.java.com/)
+[![DSA](https://img.shields.io/badge/Focus-Data%20Structures%20%26%20Algorithms-blue?style=for-the-badge)](#-what-youll-find-here)
+[![Practice](https://img.shields.io/badge/Practice-Problem%20Solving-success?style=for-the-badge)](#-problem-solving-approach)
+[![License](https://img.shields.io/badge/License-GPL--3.0-lightgrey?style=for-the-badge)](LICENSE)
+
+> A structured Java repository for learning Data Structures & Algorithms, developing problem-solving patterns, and building strong foundations for coding interviews and software development.
+
+**DSA-BY-SPS** is a continuously evolving collection of Java implementations, algorithmic problem-solving techniques, Java programming concepts, notes, and practice material.
+
+The repository is designed around one principle:
+
+> **Understand the concept → Recognize the pattern → Implement the solution → Analyze complexity → Optimize → Practice**
+
+---
+
+## Table of Contents
+
+* [About](#-about)
+* [What You'll Find Here](#-what-youll-find-here)
+* [Topics Covered](#-topics-covered)
+* [Repository Structure](#-repository-structure)
+* [Problem-Solving Approach](#-problem-solving-approach)
+* [Recommended Learning Path](#-recommended-learning-path)
+* [Complexity Analysis](#-complexity-analysis)
+* [Java Concepts](#-java-concepts)
+* [Getting Started](#-getting-started)
+* [How to Run the Programs](#-how-to-run-the-programs)
+* [Practice Platforms](#-practice-platforms)
+* [Learning Resources](#-learning-resources)
+* [Future Roadmap](#-future-roadmap)
+* [Contributing](#-contributing)
+* [Author](#-author)
+* [License](#-license)
 
 ---
 
 ## About
 
-**DSA-BY-SPS** is a Java-based repository for learning and practicing **Data Structures and Algorithms**.
+**DSA-BY-SPS** is a Java-based learning and practice repository focused on building strong foundations in:
 
-The repository contains implementations of important DSA concepts along with solutions to common coding problems. It is designed to build strong problem-solving skills, understand algorithmic patterns, and improve the ability to write efficient Java solutions.
+* Data Structures
+* Algorithms
+* Problem-Solving Patterns
+* Algorithm Optimization
+* Time & Space Complexity
+* Java Programming
+* Coding Interview Preparation
+* Competitive Programming Fundamentals
 
-The repository is also useful for **coding interviews, competitive programming, placement preparation, and Java development practice**.
-
----
-
-## Goals
-
-The main goals of this repository are:
-
-* Learn Data Structures and Algorithms using Java
-* Understand common problem-solving patterns
-* Practice interview-oriented DSA problems
-* Learn multiple approaches to solving problems
-* Improve Time and Space Complexity
-* Strengthen Java programming fundamentals
-* Maintain a structured collection of DSA implementations
-* Build a strong foundation for coding interviews and placements
+The repository combines **conceptual learning with implementation**, making it useful for anyone who wants to move beyond memorizing solutions and instead develop the ability to recognize patterns and solve unfamiliar problems.
 
 ---
 
-# Repository Structure-->Need to be updated:
+## What You'll Find Here
+
+The repository currently includes implementations and learning material covering areas such as:
+
+### Data Structures
+
+* Arrays
+* Linked Lists
+* Stacks
+* Queues
+* Priority Queues
+* Heaps
+* Trees
+* Binary Search Trees
+* Graphs
+* Hash-based problem solving
+* Java Collections Framework
+
+### Algorithms & Patterns
+
+* Sorting
+* Binary Search
+* Binary Search on Answer
+* Sliding Window
+* Two Pointer
+* Recursion
+* Backtracking
+* Greedy Algorithms
+* Dynamic Programming
+* Bit Manipulation
+* Graph Traversal
+* Heap-based algorithms
+
+### Java Development Concepts
+
+The repository also extends beyond DSA into important Java fundamentals:
+
+* Generics
+* Java Collections
+* InputStream / OutputStream
+* Streams API
+* Custom Comparators
+* Synchronization
+* Object-Oriented Programming concepts
+* Java problem-solving techniques
+
+### Supporting Material
+
+Additional learning material includes:
+
+* Algorithm notes
+* Sorting explanations
+* Bit manipulation notes
+* Java Generics theory
+* Binary Tree construction visualization
+* SQL practice material
+
+---
+
+## Topics Covered
+
+| Category            | Topics                                               |
+| ------------------- | ---------------------------------------------------- |
+| Arrays              | Next Permutation, Counting Inversions, Sort Colors   |
+| Searching           | Binary Search, Binary Search on Answer               |
+| Sorting             | Merge Sort and other sorting concepts                |
+| Bit Manipulation    | XOR, Bit Counting, Range XOR, Bitwise Arithmetic     |
+| Linked Lists        | Fundamental linked-list concepts                     |
+| Stacks              | Stack implementation, Prefix to Infix                |
+| Queues              | Queue and Priority Queue concepts                    |
+| Heaps               | Heap construction, Heap Sort, Heap validation        |
+| Recursion           | Recursive problem solving                            |
+| Backtracking        | Constraint-based search and recursive exploration    |
+| Sliding Window      | Window-based optimization techniques                 |
+| Two Pointer         | Pairing and range-based problem solving              |
+| Greedy              | Greedy problem-solving strategies                    |
+| Graphs              | Graph algorithms and traversal concepts              |
+| Dynamic Programming | Optimization using overlapping subproblems           |
+| Trees               | Binary Trees and tree-based problem solving          |
+| Java                | Generics, Streams, I/O, Synchronization, Collections |
+
+---
+
+## Repository Structure
+
+The repository is organized by concept rather than by a single monolithic collection of solutions.
 
 ```text
 DSA-BY-SPS/
@@ -61,7 +164,6 @@ DSA-BY-SPS/
 │   ├── ConvertAtoB.java
 │   ├── Divide2Numbers.java
 │   ├── OddFrequenciesInArray.java
-│   ├── SingleNumbeer.java
 │   └── XORInAGivenRange.java
 │
 ├── Collections Framework/
@@ -84,12 +186,12 @@ DSA-BY-SPS/
 │   ├── HeapSort.java
 │   └── IsArrayAsMinHeap.java
 │
-├── Java' s InputStream and OutputStream/
+├── Java's InputStream and OutputStream/
 │
 ├── Linked Lists Basics Only/
 │
 ├── Queue/
-│   └── ProrityQueue Basics/
+│   └── PriorityQueue Basics/
 │
 ├── Recursion and Backtracking/
 │
@@ -110,6 +212,8 @@ DSA-BY-SPS/
 │
 ├── Synchronization in Java/
 │
+├── Trees/
+│
 ├── BINARY TREE CONSTRUCTION.png
 ├── SQL PRACTICE FOR DTCC.txt
 ├── .gitignore
@@ -117,36 +221,196 @@ DSA-BY-SPS/
 └── README.md
 ```
 
----
-# Learning Approach
+> **Note:** The repository is actively evolving. New implementations, explanations, and topics may be added over time.
 
-A recommended way to use this repository is:
+---
+
+# Problem-Solving Approach
+
+The purpose of this repository is not simply to collect working code.
+
+Each problem should be approached systematically.
 
 ```text
-Understand the Concept
+Understand the Problem
         ↓
-Study the Approach
+Identify Constraints
+        ↓
+Develop Brute Force
+        ↓
+Analyze Complexity
+        ↓
+Identify the Pattern
+        ↓
+Optimize the Approach
         ↓
 Implement in Java
         ↓
-Analyze Time Complexity
+Test Edge Cases
         ↓
-Analyze Space Complexity
+Analyze Time & Space Complexity
         ↓
-Solve Similar Problems
-        ↓
-Optimize the Solution
+Try Similar Problems
 ```
 
-For every problem, try to understand:
+For every problem, ask:
 
-1. What is the problem asking?
-2. What is the brute-force approach?
-3. Can the solution be optimized?
-4. Which data structure or algorithmic pattern is useful?
-5. What is the Time Complexity?
-6. What is the Space Complexity?
-7. Can the same idea be applied to another problem?
+1. What exactly is the problem asking?
+2. What are the constraints?
+3. What is the simplest brute-force solution?
+4. Can the solution be optimized?
+5. Which data structure or algorithmic pattern applies?
+6. What is the time complexity?
+7. What is the space complexity?
+8. What edge cases can break the solution?
+9. Can the same pattern solve another problem?
+
+This approach encourages **pattern recognition over memorization**.
+
+---
+
+# Recommended Learning Path
+
+If you're starting DSA from the beginning, the following sequence provides a practical progression:
+
+```text
+Java Fundamentals
+       ↓
+Arrays
+       ↓
+Strings
+       ↓
+Linked Lists
+       ↓
+Stacks
+       ↓
+Queues
+       ↓
+Recursion
+       ↓
+Sorting
+       ↓
+Binary Search
+       ↓
+Sliding Window & Two Pointer
+       ↓
+Bit Manipulation
+       ↓
+Heaps
+       ↓
+Greedy Algorithms
+       ↓
+Trees
+       ↓
+Graphs
+       ↓
+Dynamic Programming
+       ↓
+Advanced Problem Solving
+```
+
+The order is flexible. The important part is to build each concept on top of the previous one and continuously solve problems.
+
+---
+
+# Problem-Solving Patterns
+
+A major focus of this repository is learning reusable patterns.
+
+| Pattern                     | Typical Use                                     |
+| --------------------------- | ----------------------------------------------- |
+| **Binary Search**           | Searching sorted data efficiently               |
+| **Binary Search on Answer** | Optimization and feasibility problems           |
+| **Two Pointer**             | Pair, range, and sorted-array problems          |
+| **Sliding Window**          | Subarray and substring problems                 |
+| **Recursion**               | Recursive decomposition of problems             |
+| **Backtracking**            | Exploring possible configurations               |
+| **Greedy**                  | Making locally optimal decisions                |
+| **Dynamic Programming**     | Overlapping subproblems and optimization        |
+| **Bit Manipulation**        | Efficient binary/bitwise operations             |
+| **Heap**                    | Priority-based processing                       |
+| **Graph Traversal**         | BFS / DFS based problems                        |
+| **Sorting**                 | Ordering data to simplify subsequent operations |
+
+Learning these patterns is often more valuable than memorizing individual solutions.
+
+---
+
+# Complexity Analysis
+
+Correctness is only one part of a good solution.
+
+A strong DSA solution should also consider **efficiency**.
+
+### Common Time Complexities
+
+| Complexity   | Name         | Typical Example                       |
+| ------------ | ------------ | ------------------------------------- |
+| `O(1)`       | Constant     | Direct array access                   |
+| `O(log n)`   | Logarithmic  | Binary Search                         |
+| `O(n)`       | Linear       | Array traversal                       |
+| `O(n log n)` | Linearithmic | Merge Sort                            |
+| `O(n²)`      | Quadratic    | Basic nested-loop solutions           |
+| `O(2ⁿ)`      | Exponential  | Some recursive/backtracking solutions |
+
+### Space Complexity
+
+When analyzing space, consider:
+
+* Auxiliary arrays
+* HashMaps / HashSets
+* Recursion stack
+* Queues and stacks
+* Temporary data structures
+* Additional objects
+
+The objective is to find a practical balance between:
+
+> **Time Complexity + Space Complexity + Readability + Maintainability**
+
+---
+
+# Java Concepts
+
+DSA is implemented primarily using **Java**, while the repository also includes Java-development concepts that are useful for writing production-quality solutions.
+
+Areas include:
+
+### Generics
+
+* Generic classes
+* Generic methods
+* Wildcards
+* Producer / Consumer concepts
+
+### Collections
+
+* Lists
+* Sets
+* Maps
+* Queues
+* Priority Queues
+* Custom comparators
+
+### Streams
+
+* Stream API
+* Frequency-based processing
+* Custom Comparator usage
+* Functional-style data processing
+
+### I/O
+
+* `InputStream`
+* `OutputStream`
+* Java input/output fundamentals
+
+### Concurrency
+
+* Synchronization
+* Thread-safety fundamentals
+
+These concepts complement DSA by improving fluency with the Java ecosystem used in competitive programming, interviews, and software development.
 
 ---
 
@@ -154,19 +418,21 @@ For every problem, try to understand:
 
 ## Prerequisites
 
-Install Java on your system.
+Install a Java Development Kit (JDK) on your system.
 
-Check your Java installation:
+Verify the installation:
 
 ```bash
 java --version
 ```
 
-Check the Java compiler:
+Verify the Java compiler:
 
 ```bash
 javac --version
 ```
+
+A modern JDK is recommended.
 
 ---
 
@@ -184,189 +450,152 @@ cd DSA-BY-SPS
 
 ---
 
-## Compile a Java Program
+# How to Run the Programs
 
-Navigate to the required directory and compile the Java file:
+Navigate to the directory containing the Java file.
+
+### Compile
 
 ```bash
 javac FileName.java
 ```
 
-Run the compiled class:
+### Run
 
 ```bash
 java FileName
 ```
 
-For example:
+### Example
+
+For a file such as `MergeSort.java`:
 
 ```bash
 javac MergeSort.java
 java MergeSort
 ```
 
----
-
-# Recommended DSA Learning Order
-
-If you are using this repository to learn DSA from the beginning, a useful order is:
-
-```text
-1. Java Fundamentals
-        ↓
-2. Arrays
-        ↓
-3. Strings
-        ↓
-4. Linked Lists
-        ↓
-5. Stacks
-        ↓
-6. Queues
-        ↓
-7. Recursion
-        ↓
-8. Sorting
-        ↓
-9. Binary Search
-        ↓
-10. Sliding Window & Two Pointer
-        ↓
-11. Bit Manipulation
-        ↓
-12. Heaps
-        ↓
-13. Greedy
-        ↓
-14. Graphs
-        ↓
-15. Dynamic Programming
-        ↓
-16. Advanced Problem Solving
-```
-
----
-
-# Problem-Solving Patterns
-
-The repository is particularly useful for practicing these important patterns:
-
-| Pattern                 | Main Use                         |
-| ----------------------- | -------------------------------- |
-| Binary Search           | Search and optimization problems |
-| Binary Search on Answer | Minimize/maximize a valid answer |
-| Two Pointer             | Pair and sorted-array problems   |
-| Sliding Window          | Subarray and substring problems  |
-| Recursion               | Recursive problem decomposition  |
-| Backtracking            | Exploring possible choices       |
-| Greedy                  | Locally optimal decisions        |
-| Dynamic Programming     | Overlapping subproblems          |
-| Bit Manipulation        | Efficient bitwise operations     |
-| Heap                    | Priority-based processing        |
-| Graph Traversal         | BFS / DFS problems               |
-| Sorting                 | Ordering and preprocessing       |
-
----
-
-# Complexity Matters
-
-While solving problems, focus not only on getting the correct answer but also on efficiency.
-
-### Time Complexity
-
-Common complexities:
-
-```text
-O(1)       Constant
-O(log n)   Logarithmic
-O(n)       Linear
-O(n log n) Linearithmic
-O(n²)      Quadratic
-O(2ⁿ)      Exponential
-```
-
-### Space Complexity
-
-Always consider:
-
-* Extra arrays
-* Hash tables
-* Recursion stack
-* Auxiliary data structures
-* Temporary variables
-
-The goal is to find a good balance between **Time Complexity, Space Complexity, and code simplicity**.
+> Some programs may have their own input/output expectations. Read the source code before execution and provide the required input accordingly.
 
 ---
 
 # Practice Platforms
 
-The concepts and problem-solving techniques in this repository can be further practiced on:
+The concepts and patterns covered here can be reinforced through dedicated problem-solving platforms:
 
-* LeetCode
-* GeeksforGeeks
-* CodeChef
-* HackerRank
+* [LeetCode](https://leetcode.com/)
+* [GeeksforGeeks](https://www.geeksforgeeks.org/)
+* [CodeChef](https://www.codechef.com/)
+* [HackerRank](https://www.hackerrank.com/)
 
-The repository is intended to complement regular problem-solving practice rather than replace it.
+A recommended workflow is:
+
+```text
+Learn a Concept
+      ↓
+Implement It
+      ↓
+Solve Easy Problems
+      ↓
+Solve Medium Problems
+      ↓
+Identify Patterns
+      ↓
+Solve Variations
+      ↓
+Optimize
+      ↓
+Revise
+```
 
 ---
 
-# Additional Resources
+# Learning Resources
 
-The repository also contains supporting learning material such as:
+The repository includes supporting material alongside the implementations, including:
 
-* Sorting explanation material
+* Sorting explanations
 * Bit manipulation notes
 * Java Generics theory
-* Binary tree construction visual material
+* Binary Tree construction visualization
 * SQL practice material
+* Java Streams examples
+* Java I/O examples
+
+These resources are intended to complement the code rather than replace hands-on problem solving.
 
 ---
 
-# Repository Philosophy
+# Future Roadmap
 
-> **Learn the concept → Understand the pattern → Implement it → Analyze it → Practice it → Optimize it.**
+The repository is intended to grow continuously.
 
-DSA is not about memorizing solutions.
+Planned areas include:
 
-It is about recognizing patterns and developing the ability to solve unfamiliar problems.
-
----
-
-# Future Improvements
-
-Planned improvements for the repository include:
-
-* Add more DSA problems
-* Add detailed explanations for each problem
-* Add Time and Space Complexity to implementations
-* Add more optimized approaches
-* Add additional tree and graph algorithms
-* Add more Dynamic Programming problems
-* Add problem links where applicable
-* Add visual explanations
-* Improve folder organization
-* Add structured interview preparation material
-* Add System Design learning material
+* [ ] Expand the problem collection
+* [ ] Add detailed explanations to individual solutions
+* [ ] Document Time & Space Complexity consistently
+* [ ] Add brute-force vs optimized comparisons
+* [ ] Expand Tree algorithms
+* [ ] Expand Graph algorithms
+* [ ] Add more Dynamic Programming problems
+* [ ] Add problem-source links where applicable
+* [ ] Add visual explanations
+* [ ] Improve naming and folder consistency
+* [ ] Add structured interview preparation
+* [ ] Add additional Java development concepts
+* [ ] Expand SQL practice
+* [ ] Add System Design learning material
 
 ---
 
 # Contributing
 
-Suggestions, corrections, optimized approaches, and useful additions are welcome.
+Contributions, corrections, optimizations, and learning resources are welcome.
 
 If you would like to contribute:
 
-1. Fork the repository
-2. Create a new branch
-3. Add or improve a solution
-4. Test your implementation
-5. Commit your changes
-6. Push the branch
-7. Open a Pull Request
+1. Fork the repository.
+2. Create a dedicated branch.
+3. Add or improve an implementation.
+4. Test the changes.
+5. Keep the implementation readable and focused.
+6. Commit your changes with a meaningful message.
+7. Push the branch.
+8. Open a Pull Request.
 
-Please keep implementations readable and focused on learning.
+### Contribution Guidelines
+
+When adding a new problem, try to include:
+
+* Clear problem name
+* Clean Java implementation
+* Appropriate variable naming
+* Explanation where necessary
+* Time Complexity
+* Space Complexity
+* Edge-case considerations
+* Optimized approach when applicable
+
+The goal is to keep the repository useful as a **learning resource**, not just a collection of code.
+
+---
+
+# Repository Philosophy
+
+> **Don't memorize solutions. Learn to recognize patterns.**
+
+A strong problem solver should be able to look at an unfamiliar problem and ask:
+
+* What data structure fits?
+* What pattern does this resemble?
+* Can I reduce the search space?
+* Can I trade space for time?
+* Can I eliminate unnecessary computation?
+* What are the constraints telling me?
+* Can I prove that my approach works?
+
+That mindset is the foundation of effective problem solving.
 
 ---
 
@@ -374,18 +603,26 @@ Please keep implementations readable and focused on learning.
 
 ## K V R Pavan Shanmukh
 
+Java | Data Structures & Algorithms | Problem Solving
+
 GitHub: [@KVRPavanShanmukh](https://github.com/KVRPavanShanmukh)
 
 ---
 
 # License
 
-This repository includes a **GPL-3.0 license**.
+This project is licensed under the **GNU General Public License v3.0**.
 
-The project is primarily intended for educational purposes, DSA practice, Java learning, coding interview preparation, and problem-solving.
+See the [`LICENSE`](LICENSE) file for the complete license text.
 
 ---
 
-<p align="center">
-  <b>Keep Learning. Keep Solving. Keep Improving.</b>
-</p>
+<div align="center">
+
+### Learn. Implement. Analyze. Optimize. Repeat.
+
+**DSA-BY-SPS**
+
+Built with Java and a continuous commitment to becoming a better problem solver.
+
+</div>
