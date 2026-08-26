@@ -230,7 +230,141 @@ WINDOW FUNCTIONS:
 		PARTITION BY ...
 		ORDER BY ...
 	)
-	
+	PARTITION BY → Divide rows into groups, but DON'T collapse them
+	ORDER BY     → Decide the order inside the window
+	1. ROW_NUMBER()
+	Use when: You need a unique sequential number for every row.
+
+	ROW_NUMBER() OVER (
+		PARTITION BY department
+		ORDER BY salary DESC
+	)
+
+	Result:
+	90000 → 1
+	80000 → 2
+	80000 → 3
+	60000 → 4
+	Memory: ROW_NUMBER = unique numbering
+
+
+	2. RANK()
+	Use when: You want ranking where ties get the same rank and gaps appear.
+	90000 → 1
+	80000 → 2
+	80000 → 2
+	60000 → 4
+	Memory: RANK = ties + gaps
+
+	3. DENSE_RANK()
+
+	Use when: You want ranking where ties get the same rank but no gaps.
+
+	90000 → 1
+	80000 → 2
+	80000 → 2
+	60000 → 3
+
+	Memory: DENSE_RANK = ties + no gaps
+
+	The 3 Ranking Functions
+
+	Memorize this:
+
+	ROW_NUMBER  → 1 2 3 4
+	RANK        → 1 2 2 4
+	DENSE_RANK  → 1 2 2 3
+	4. SUM() OVER()
+
+	Use when: You want a running total without collapsing rows.
+
+	SUM(salary) OVER (
+		ORDER BY date
+	)
+
+	Example:
+
+	100 → 100
+	200 → 300
+	150 → 450
+	300 → 750
+
+	Memory: SUM OVER = running/partitioned total
+
+	5. AVG() OVER()
+
+	Use when: You want an average while keeping every row.
+
+	AVG(salary) OVER (
+		PARTITION BY department
+	)
+
+	Example:
+
+	Ravi   60000 → dept_avg 76666
+	Priya  80000 → dept_avg 76666
+	Arun   90000 → dept_avg 76666
+
+	Memory: AVG OVER = group average without GROUP BY
+
+	6. LAG()
+
+	Use when: You need the previous row's value.
+
+	LAG(salary) OVER (
+		ORDER BY date
+	)
+
+	Example:
+
+	Date | Sales | Previous
+	-----+-------+---------
+	1    | 100   | NULL
+	2    | 200   | 100
+	3    | 150   | 200
+	4    | 300   | 150
+
+	Memory: LAG = look backward
+
+	7. LEAD()
+
+	Use when: You need the next row's value.
+
+	LEAD(salary) OVER (
+		ORDER BY date
+	)
+
+	Example:
+
+	Date | Sales | Next
+	-----+-------+-----
+	1    | 100   | 200
+	2    | 200   | 150
+	3    | 150   | 300
+	4    | 300   | NULL
+
+	Memory: LEAD = look forward
+
+	8. FIRST_VALUE()
+
+	Use when: You want the first value in the window.
+
+	FIRST_VALUE(salary) OVER (
+		PARTITION BY department
+		ORDER BY salary DESC
+	)
+
+	Memory: FIRST_VALUE = first row's value
+
+	9. LAST_VALUE()
+
+	Use when: You want the last value in the window.
+
+	LAST_VALUE(salary) OVER (...)
+
+	Important: LAST_VALUE() is trickier because window frames matter. We'll learn this separately.
+
+	Memory: LAST_VALUE = last value in the window
 	ROW_NUMBER(),RANK(),DENSE_RANK()	
 	
 		Q1:
@@ -309,6 +443,10 @@ WINDOW FUNCTIONS:
 		
 		
 		
+		
+		
+		
+
 25th August:
 CTE Revision:
 Q1: Easy CTE
@@ -410,3 +548,403 @@ Solution:
 	join cte c
 	on e.department = d.department
 	where e.salary = c.salary;
+	
+	
+Q6:
+Find the department with the highest average salary.
+Return:
+department | avg_salary
+You should use a CTE with AVG() and then find the maximum average.
+
+Solution:
+	with cte as (
+    select department, avg(salary) as avgsal
+		from employees
+		group by department
+	)
+	select
+		department,
+		avgsal
+	from cte
+	where avgsal = (select max(avgsal) from cte);
+
+Q7:
+Suppose:
+
+employees
+
+id | name   | department | salary
+---+--------+------------+-------
+1  | Ravi   | IT         | 60000
+2  | Priya  | IT         | 80000
+3  | Arun   | IT         | 90000
+4  | Kiran  | HR         | 70000
+5  | Sneha  | HR         | 50000
+6  | Anu    | Sales      | 75000
+Question
+
+Using two CTEs:
+
+First CTE → calculate the average salary of each department.
+Second CTE → keep only departments whose average salary is greater than 60000.
+Finally, display those departments.
+
+Expected:
+
+department | avg_salary
+-----------+-----------
+IT         | 76666...
+Sales      | 75000
+
+Solution:
+	with avge as(
+		select department,avg(salary) as avgsal
+		from employees
+		group by department
+	),
+	avgsal as (
+		select * from avge a
+		where avgsal > 60000
+	)
+	select * from avgsal;
+	
+	
+CTE Q8 — CTE + Window Function
+Using employees, write a query that:
+Creates a CTE containing each employee's department average salary using a window function.
+Returns only employees whose salary is greater than their department average.
+
+Expected columns:
+name | department | salary | avg_salary
+
+This is an important pattern because it combines:
+CTE
+ +
+Window Function
+ +
+WHERE
+
+Solution:
+	with cte as (
+		select name,department,salary,
+		avg(salary) over (
+			partition by department
+		) as avgsal
+		from employees
+	)
+	select * from cte c
+	where c.salary > c.avgsal;
+	
+
+Why this is a great pattern
+
+You used:
+
+AVG() OVER(PARTITION BY department)
+        ↓
+keeps every employee
+        ↓
+CTE gives us avgsal as a column
+        ↓
+outer WHERE compares salary > avgsal
+
+
+
+WINDOW FUNCTIONS Revision:
+
+Window Q1 — ROW_NUMBER()
+
+Using employees:
+
+Give every employee a row number within their department, with the highest-paid employee getting number 1.
+
+Return:
+
+name | department | salary | rn
+
+For example:
+
+Arun  | IT | 90000 | 1
+Priya | IT | 80000 | 2
+Ravi  | IT | 60000 | 3
+
+Solution:
+	with cte as (
+		select name,department,salary,
+		row_number() over (
+			partition by department
+			order by salary desc
+		) as rn
+		from employees
+	)
+	select * from cte;
+	
+	(or)
+	
+	select name,department,salary,
+		row_number() over (
+			partition by department
+			order by salary desc
+		) as rn
+	from employees;
+	
+	But you do need the CTE/subquery if you want to filter by rn, for example:
+	WHERE rn = 1
+	because a window-function result generally can't be filtered in the same query level with WHERE.
+	That gives us the classic pattern:
+
+	ROW_NUMBER()
+		↓
+	CTE
+		↓
+	WHERE rn = 1
+		↓
+	highest-paid employee per department
+
+Q2:RANK()
+Using the employees table:
+Give each employee a rank within their department based on salary, with the highest salary ranked 1.
+Return:
+name | department | salary | rank
+
+If two employees have the same salary, they should receive the same rank.
+For example:
+
+Arun   | IT | 90000 | 1
+Priya  | IT | 80000 | 2
+Ravi   | IT | 80000 | 2
+Kiran  | IT | 60000 | 4
+
+
+Solution:
+	with cte as (
+		select name,department,salary,
+		rank() over(
+			partition by department
+			order by salary desc;
+		) as rnk
+		from employees
+	)
+	select * from cte
+	where rnk = 1;
+	
+	
+Q3 — DENSE_RANK()
+Using the same employees table:
+Rank employees within each department by salary from highest to lowest using DENSE_RANK().
+Return:
+name | department | salary | rnk
+
+Don't filter to rank 1 yet. Just produce the ranking for every employee.
+
+Solution:
+	with cte as (
+		select name,department,salary,
+		dense_rank() over (
+			partition by department
+			order by salary desc
+		) as rnk
+		from employees
+	)
+	select * from cte;
+
+
+Q4 — Running Sum
+Using:
+employees
+Calculate a running salary total within each department, ordered from the lowest salary to the highest.
+Return:
+name | department | salary | running_salary
+Use SUM() OVER().
+
+Solution:
+	with cte as (
+		select name,department, salary,
+		sum(salary) over (
+			partition by department
+			order by salary asc
+		) summy
+		from employees
+	)
+	select * from cte;
+
+
+Q5 — Running Average
+Using the same employees table:
+Calculate the running average salary within each department, ordered by salary from lowest to highest.
+Return:
+name | department | salary | running_avg
+Use AVG() OVER().
+
+No CTE required unless you want to use one.
+
+Solution :
+	select name,department,salary,
+	avg(salary) over (
+		partition by department
+		order by salary asc
+	) as avgsal
+	from employees;
+
+
+Q6 — LAG()
+Now let's learn something new.
+Using the employees table:
+For each employee, show their salary and the salary of the previous employee within the same department, ordered by salary from lowest to highest.
+Return:
+name | department | salary | previous_salary
+Use:
+LAG(...)
+No CTE needed.
+
+Solution:
+	select name,department,salary,
+	lag(salary) over (
+		partition by department
+		order by salary asc
+	) as previous_salary
+	from employees;
+	
+	
+Q7 — LEAD()
+Now the opposite.
+For each employee, show their salary and the salary of the next employee within the same department, ordered by salary from lowest to highest.
+Return:
+name | department | salary | next_salary
+Use LEAD().
+
+Solution:
+	select name,department,salary,
+	lead(salary) over (
+		partition by department
+		order by salary asc
+	) as next_salary
+	from employees;
+	
+
+Q8 — Salary Difference
+Now let's combine LAG() with arithmetic.
+For each employee, calculate the difference between their salary and the previous employee's salary within the same department, ordered by salary ascending.
+Return:
+name | department | salary | salary_difference
+
+For example:
+60000 → NULL
+80000 → 20000
+90000 → 10000
+
+Solution:
+	with cte as (
+		select name,department,salary,
+		lag(salary) over (
+			partition by department
+			order by salary asc
+		) as previous_salary
+		from employees
+	)
+	select name,department,salary,
+	salary - previous_salary as salary_difference
+	from cte;
+	
+	
+Q9 — LAG() + PARTITION BY
+Find employees whose salary is greater than the previous employee's salary within their department.
+Return:
+name | department | salary | previous_salary
+Use LAG() and a CTE.
+
+Solution:
+	with cte as (
+		select name,department,salary,
+		lag(salary) over (
+			partition by department
+			order by salary asc
+		) as previous_sal
+		from employees
+	)
+	select * from cte
+	where salary > previous_sal;
+	
+
+Now Q10 — FIRST_VALUE():
+Using the employees table:
+For each employee, display their name, department, salary, and the highest salary in their department.
+Expected columns:
+name | department | salary | highest_salary
+Use FIRST_VALUE().
+
+Solution:
+	select name,department,salary,
+	first_value(salary) over (
+		partition by department
+		order by salary desc
+	) as highest_salary
+	from employees;
+
+
+Q11 — LAST_VALUE()
+Now the slightly tricky one.
+For each employee, display their salary and the lowest salary in their department using LAST_VALUE().
+Return:
+name | department | salary | lowest_salary
+Use LAST_VALUE() with PARTITION BY and ORDER BY.
+
+Solution:
+	select name,department,salary,
+	first_value(salary) over(
+		partition by department
+		order by salary asc
+	)as lowest_salary
+	from employees;
+	
+	(or)
+	
+	select name,department,salary,
+	last_value(salary) over(
+		partition by department
+		order by salary desc
+		rows between unbounded preceding
+		and unbounded following
+	)as lowest_salary
+	from employees;
+	
+
+
+
+Memorize this
+FIRST_VALUE + ASC
+→ lowest
+
+FIRST_VALUE + DESC
+→ highest
+
+LAST_VALUE + ASC
+→ highest
+
+LAST_VALUE + DESC
+→ lowest
+And:
+
+LAST_VALUE()
++
+full window frame
+→ important
+
+This is why LAST_VALUE() is more troublesome than FIRST_VALUE().
+
+
+
+Q12 — Window Frame / Running Sum
+Now let's test whether you understand the window frame.
+Using employees, calculate the running salary total within each department, ordered by salary ascending.
+
+Write it using an explicit window frame:
+ROWS BETWEEN ...
+
+Your query should return:
+name | department | salary | running_salary
+
+This is an important concept for your exam.
+
+Solution:
+	
