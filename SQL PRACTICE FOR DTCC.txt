@@ -690,8 +690,8 @@ Solution:
 	
 	But you do need the CTE/subquery if you want to filter by rn, for example:
 	WHERE rn = 1
-	because a window-function result generally can't be filtered in the same query level with WHERE.
 	That gives us the classic pattern:
+	because a window-function result generally can't be filtered in the same query level with WHERE.
 
 	ROW_NUMBER()
 		↓
@@ -947,4 +947,756 @@ name | department | salary | running_salary
 This is an important concept for your exam.
 
 Solution:
+	NOT GIVEN
 	
+1. Ranking
+   ROW_NUMBER / RANK / DENSE_RANK
+
+2. Group calculation without collapsing rows
+   AVG() OVER
+   SUM() OVER
+
+3. Previous row
+   LAG()
+
+4. Next row
+   LEAD()
+
+5. First/last value
+   FIRST_VALUE / LAST_VALUE
+
+
+
+
+"highest employee per department"
+        ↓
+RANK / ROW_NUMBER
+
+"average of department beside every employee"
+        ↓
+AVG() OVER(PARTITION BY ...)
+
+"previous month's value"
+        ↓
+LAG()
+
+"next month's value"
+        ↓
+LEAD()
+
+"running total"
+        ↓
+SUM() OVER(ORDER BY ...)
+
+"break query into steps"
+        ↓
+CTE
+
+
+
+
+
+CASE WHEN:
+Basic structure:
+CASE
+    WHEN condition THEN result
+    WHEN condition THEN result
+    ELSE result
+END
+
+CASE + Aggregate:
+
+This is where CASE becomes very powerful.
+Suppose you want to count how many employees have salary above 70,000:
+	SELECT
+		COUNT(
+			CASE
+				WHEN salary > 70000 THEN 1
+			END
+		) AS high_salary_count
+		FROM employees;
+	
+The CASE returns 1 only for employees satisfying the condition.
+
+
+CASE + GROUP BY:
+Suppose:
+For each department, count high-salary employees.
+
+	SELECT
+		department,
+		COUNT(
+			CASE
+				WHEN salary > 70000 THEN 1
+			END
+		) AS high_salary_employees
+	FROM employees
+	GROUP BY department;
+
+This pattern is called conditional aggregation.	
+
+
+Your Q1 — Basic CASE
+Using employees:
+Display name, salary, and a new column called salary_category.
+Rules:
+salary >= 80000 → 'High'
+salary >= 60000 → 'Medium'
+otherwise       → 'Low'
+Solution: 
+	select name, salary,
+	case
+		when salary >= 80000 then 'High'
+		when salary >= 60000 then 'Medium'
+		else 'Low'
+		end as salary_category
+	from employees;
+
+
+CASE Q2 — Conditional Aggregation
+Using employees:
+For each department, find:
+Total number of employees
+Number of employees whose salary is greater than 70000
+Return:
+department | total_employees | high_salary_employees
+Use GROUP BY + CASE.
+
+Solution:
+	select department, count(*) as total_employees,  
+	count(  
+		Case  
+		When salary> 70000 then 1  
+		End  
+	)as high_salary_employees  
+	From employees
+	Group by department;
+	
+
+CASE Q3 — Multiple Conditions
+Using employees:
+For each department, calculate:
+Number of High salary employees (salary >= 80000)
+Number of Medium salary employees (60000–79999)
+Number of Low salary employees (< 60000)
+
+Return:
+department | high | medium | low
+Use GROUP BY + CASE.
+
+Solution:
+	select department,
+	count (
+		case when salary >= 80000 then 'High'
+		end
+	)as high,
+	count (
+		case
+		when salary>=60000 and salary<=79999 then 'Medium'
+		end
+	)as medium,
+	count (
+		case
+		when salary < 60000 then 'Low'
+		end
+	)as low
+	from employees
+	group by department;
+	
+One small improvement: since you're only counting, you don't actually need to return 'High', 'Medium', 'Low'. You could simply return 1.
+
+
+Q4 — CASE inside SUM()
+Now let's use another very common pattern.
+For each department, calculate the total salary paid to High-salary employees (salary >= 80000).
+Expected:
+department | high_salary_total
+Use:
+SUM(CASE WHEN ... THEN ... ELSE ... END)
+
+Solution:
+	select department, sum(
+		case
+			when salary >= 80000 then salary
+			else 0
+		end	
+	) as high_salary_total
+	from employees
+	group by department;
+
+
+
+CASE Q5 — HackerRank-style
+Using employees:
+For each department, display:
+department
+total salary
+total salary of employees earning >= 80000
+total salary of employees earning < 80000
+
+Expected:
+department | total_salary | high_salary_total | low_salary_total
+Use GROUP BY + SUM(CASE WHEN...)
+
+Solution:
+	select department,sum(salary) as total_salary,
+	sum(
+		case when salary >= 80000 then salary
+		else 0
+		end
+	) as high_salary_total,
+	sum(
+		case when salary < 80000 then salary
+		else 0
+		end
+	) as low_salary_total
+	from employees
+	group by department;
+
+
+
+CASE Q6 — Slightly harder
+Find the number of employees in each department who earn more than their department's average salary.
+Return:
+department | above_avg_count
+This one combines what you've already learned:
+CTE / Window Function
+  +
+CASE
+  +
+GROUP BY
+
+
+Solution:
+
+	with cte AS (
+		select department, salary,
+		avg(salary) OVER (
+			partition by department
+		) as avg_salary
+		from employees
+	)
+	
+	select department, count(
+			case
+				when salary > avg_sal then 1
+			end
+		) as above_avg_count
+	)
+	from cte
+	group by department;
+
+
+The important pattern:
+This is a very useful interview pattern:
+Window Function
+      ↓
+calculate something for each row
+      ↓
+	 CTE
+      ↓
+	CASE
+      ↓
+GROUP BY + COUNT/SUM
+
+
+CASE Q7 — Last one
+Let's make this closer to a real interview problem.
+Using employees:
+For each department, find the percentage of employees earning more than 70,000.
+Return:
+department | high_salary_percentage
+For example, if IT has 4 employees and 2 earn above 70,000:
+IT | 50
+Use CASE, COUNT, and GROUP BY.
+
+Solution:
+	select department,count(
+		case
+			when salary > 70000 then 1
+		end
+	) * 100.0 count(*) as high_salary_percentage
+	from employees
+	group by department;
+
+
+
+
+
+
+Stored Procedures — Part 1
+
+First, understand the idea.
+
+What is a Procedure?
+A stored procedure is a saved SQL program inside the database that you can execute whenever you want.
+
+Think:
+Normal SQL:
+write query → execute → done
+
+Procedure:
+write SQL program → SAVE it → CALL it whenever needed
+Basic Syntax — MySQL
+
+DELIMITER //
+CREATE PROCEDURE procedure_name()
+BEGIN
+    -- SQL statements
+END //
+DELIMITER ;
+
+Then execute it:
+CALL procedure_name();
+
+Example
+DELIMITER //
+CREATE PROCEDURE show_employees()
+BEGIN
+    SELECT * FROM employees;
+END //
+DELIMITER ;
+
+CALL show_employees();
+
+
+That's the basic pattern.
+
+
+Procedures with Parameters:
+This is very important for exams.
+Suppose we want to give a department and retrieve its employees.
+
+DELIMITER //
+CREATE PROCEDURE get_employees_by_department(
+    IN dept_name VARCHAR(50)
+)
+BEGIN
+    SELECT name, salary
+    FROM employees
+    WHERE department = dept_name;
+END //
+DELIMITER ;
+
+CALL get_employees_by_department('IT');
+
+
+Remember:
+	IN     → value goes INTO procedure
+	OUT    → value comes OUT of procedure
+	INOUT  → value goes in AND comes out
+
+We'll learn OUT and INOUT separately.
+
+
+
+
+Procedure Q1 — Basic
+Suppose you have:
+employees
+id | name | department | salary
+Question
+
+Create a procedure called:
+get_high_salary_employees
+It should display all employees whose salary is greater than 70000.
+Then call the procedure.
+
+Expected structure:
+CREATE PROCEDURE ...
+BEGIN
+    SELECT ...
+END
+
+Solution:
+	delimiter //
+	create procedure get_high_salary_employees()
+	begin
+		select name,salary from employees
+		where salary > 70000;
+	end //
+	delimiter;
+	
+	call get_high_salary_employees();
+
+
+
+Important:
+DELIMITER //
+CREATE PROCEDURE name()
+BEGIN
+    SQL statements;
+END //
+DELIMITER ;
+
+CALL name();
+
+
+Procedure Q2 — IN Parameter
+Create a procedure called:
+get_employees_by_department
+It should accept:
+IN dept_name
+and display:
+name | salary
+for employees belonging to that department.
+Then call it for:
+IT
+
+Solution:
+	delimiter //
+	create procedure get_employees_by_department(
+		in dept_name varchar(50)
+	)
+	begin
+		select name,salary from employees
+		where department = dept_name;
+	end //
+	delimiter;
+	
+	call get_employees_by_department('IT');
+
+
+Procedure Q3 — IN + Calculation
+Create a procedure called:
+get_salary_details
+It should accept:
+IN emp_id
+and display:
+name
+salary
+annual_salary
+
+Where:
+annual_salary = salary × 12
+Then call it for employee ID 3.
+
+Solution:
+	delimiter //
+	create procedure get_salary_details(
+		in emp_id int
+	)
+	begin
+		select name,salary,
+		salary * 12 as annual_salary
+		from employees
+		where id = emp_id;
+	end //
+	delimiter;
+	
+	call get_salary_details(3);
+
+
+Pattern to remember:
+IN parameter
+     ↓
+use it in WHERE / calculation / condition
+     ↓
+return required result
+
+
+
+
+Procedure Q4 — IF / ELSE
+Now we're getting into exam-important procedures.
+Create a procedure:
+check_salary
+It accepts:
+IN emp_id
+
+It should display:
+name | salary | salary_status
+
+Rules:
+salary >= 80000 → 'High Salary'
+salary >= 60000 → 'Medium Salary'
+otherwise       → 'Low Salary'
+
+Important: This time, use procedural IF / ELSEIF / ELSE, not CASE.
+
+Solution:
+	delimiter //
+	create procedure check_salary(
+		in emp_id int
+	)
+	begin
+		declare emp_id int;
+		declare emp_name varchar(100);
+		
+		select name,salary,
+		into emp_name, emp_salary
+		from employees
+		where id = emp_id;
+		
+		if salary >= 80000 then 
+			select emp_name as name, emp_salary as salary,
+			'High Salary' as salary_status;
+		
+		else if salary >= 60000 then
+			select emp_name as name, emp_salary as salary,
+			'Medium Salary'	as salary_status;
+		
+		else 
+			select emp_name as name, emp_salary as salary,
+			'Low Salary' as salary_status;
+		
+		end if;
+	end //
+	delimiter;
+	
+	call check_salary(3);
+
+
+The important pattern for a procedure IF:
+
+IF condition THEN
+    statements;
+ELSEIF condition THEN
+    statements;
+ELSE
+    statements;
+END IF;
+
+
+
+Don't confuse these two
+CASE inside SELECT:
+CASE
+    WHEN salary >= 80000 THEN 'High'
+    ELSE 'Low'
+END
+
+Procedural IF:
+IF emp_salary >= 80000 THEN
+    ...
+ELSE
+    ...
+END IF;
+
+PROCEDUREs are kept aside temporarily.
+
+
+
+DATE FUNCTIONS:
+We'll use this imaginary table: employees
+
+id | name  | hire_date  | salary
+---+-------+------------+-------
+1  | Ravi  | 2022-03-15 | 60000
+2  | Priya | 2021-07-20 | 80000
+3  | Arun  | 2023-01-10 | 90000
+4  | Kiran | 2020-11-05 | 70000
+
+1. YEAR()
+Use: Extract the year from a date.
+
+SELECT
+    name,
+    YEAR(hire_date) AS hire_year
+FROM employees;
+
+Result:
+Ravi  → 2022
+Priya → 2021
+Arun  → 2023
+Kiran → 2020
+
+Similarly:
+MONTH(hire_date) gives the month number.
+DAY(hire_date) gives the day.
+
+Memorize:
+YEAR(date)  → year
+MONTH(date) → month
+DAY(date)   → day
+
+
+
+
+Q1
+Using employees:
+Display the employee's name, hire_date, and the year they were hired.
+Expected:
+name | hire_date | hire_year
+Use YEAR().
+
+Solution:
+	select name, hire_date,
+	year(hire_date) as hire_year
+	from employees;
+	
+
+Q2 — MONTH()
+Display the employee's name, hire_date, and the month number in which they were hired.
+Expected:
+name | hire_date | hire_month
+Use MONTH().
+
+Solution:
+	select name, hire_date,
+	month(hire_date) as hire_month
+	from employees;
+
+
+
+Q3 — DAY()
+Display the employee's name, hire_date, and the day of the month on which they were hired.
+Expected:
+name | hire_date | hire_day
+
+Solution:
+	select name, hire_date,
+	day(hire_date) as hire_day
+	from employees;
+	
+
+
+DATEDIFF() tells you the number of days between two dates.
+Syntax:
+DATEDIFF(later_date, earlier_date)
+Example:
+DATEDIFF('2026-08-27', '2026-08-20') → 7
+
+
+
+Q4 — DATEDIFF()
+Using employees:
+Find how many days each employee has worked, assuming today is '2026-08-27'.
+
+Return:
+name | hire_date | days_worked
+Use DATEDIFF().
+
+Solution:
+	select name,hire_date,
+	datediff('2026-08-27',hire_date)
+	as days_worked from employees;
+
+
+DATE_ADD() is used to add time to a date.
+Syntax:
+DATE_ADD(date, INTERVAL value unit)
+Example:
+DATE_ADD(hire_date, INTERVAL 1 YEAR) → adds 1 year.
+
+Common units:
+YEAR
+MONTH
+DAY
+WEEK
+
+Q5 — DATE_ADD()
+Using employees:
+Display each employee's name, hire_date, and the date one year after their hire date.
+Expected:
+name | hire_date | one_year_later
+Use DATE_ADD().
+
+Solution:
+	select name,hire_date,
+	date_add(hire_date,interval 1 year) as one_year_later
+	from employees;
+
+
+
+Q6 — DATE_SUB() : Now the opposite.
+Display each employee's name, hire_date, and the date 6 months before their hire date.
+Use DATE_SUB().
+
+Solution:
+	select name,hire_date,
+	date_sub(hire_date, interval 6 month)as six_months_earlier
+	from employees;
+
+
+TIMESTAMPDIFF():
+This one is very important because unlike DATEDIFF(), it can calculate the difference in years, months, days, hours, etc.
+Syntax:
+TIMESTAMPDIFF(unit, start_date, end_date)
+Example:
+TIMESTAMPDIFF(YEAR, hire_date, '2026-08-27')
+
+Q7 — TIMESTAMPDIFF():
+Using employees:
+Find how many complete years each employee has worked as of 2026-08-27.
+Return:
+name | hire_date | years_worked
+Use TIMESTAMPDIFF().
+
+Solution:
+	select name,hire_date,
+	timestampdiff(year,hire_date,'2026-08-27')
+	as years_worked from employees;
+
+
+Q8 — Date Filtering
+Now let's combine what you've learned.
+Find all employees who were hired in 2022.
+Return:
+name | hire_date
+Use YEAR() in the WHERE clause.
+
+Solution:
+	select name,hire_date
+	from employees
+	where year(hire_date);
+
+
+
+
+
+
+Remember the SELECT order
+SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+
+
+
+Q9 — Date Filtering with MONTH()
+Find all employees who were hired in July, regardless of the year.
+Return:
+name | hire_date
+Use MONTH() in the WHERE clause.
+
+Solution:
+	select name,hire_date from employees
+	where month(hire_date) = 7;
+
+
+
+Q10 — DATE_ADD() + WHERE
+Find employees whose 1-year anniversary falls before 2026-01-01.
+In other words, add 1 year to hire_date and check whether that date is before 2026-01-01.
+Return:
+name | hire_date | anniversary
+Use DATE_ADD() in both SELECT and WHERE.
+
+Solution:
+	select name,hire_date,
+	date_add(hire_date,interval 1 year) as anniversary
+	from employees
+	where date_add(hire_date) < '2026-01-01';
+
+
+Important pattern:
+If you need to filter using a calculated column:
+Calculated in SELECT
+       ↓
+Need it in WHERE?
+       ↓
+Repeat expression OR use CTE
+
+
+
+So far...
+YEAR()           → extract year
+MONTH()          → extract month
+DAY()            → extract day
+DATEDIFF()       → difference in days
+DATE_ADD()       → add time
+DATE_SUB()       → subtract time
+TIMESTAMPDIFF()  → difference in chosen unit
