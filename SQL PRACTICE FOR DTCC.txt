@@ -1700,3 +1700,21 @@ DATEDIFF()       → difference in days
 DATE_ADD()       → add time
 DATE_SUB()       → subtract time
 TIMESTAMPDIFF()  → difference in chosen unit
+
+
+
+HackerRank-Problems:
+Q1) OLLIVANDER'S INVENTORY
+
+with cte as (
+    select w.id,wp.age,w.coins_needed,w.power,
+        min(w.coins_needed) over(
+            partition by wp.age, w.power
+        ) as min_coins
+    from Wands w
+    join Wands_Property wp on w.code = wp.code
+    where wp.is_evil = 0
+)
+select id,age,coins_needed,power from cte
+where coins_needed = min_coins
+order by power desc, age desc;
