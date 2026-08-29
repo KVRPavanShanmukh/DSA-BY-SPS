@@ -46,5 +46,6 @@ public class ConnectedComponents extends DFS {
 
         System.out.println("Number of Connected Components : ");
         System.out.println(components);
+        s.close();
     }
 }
