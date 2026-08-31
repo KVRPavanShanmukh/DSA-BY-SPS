@@ -1,0 +1,297 @@
+Matrix: A matrix is a 2D Array that stores the data elements as if ans array does.
+
+A 2D Matrix in java is initialized as:	int[][] matrix = new int[rows][cols];
+For example:
+int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+Declaring and Initializing a Matrix
+int rows = 3, cols = 3;
+int[][] matrix = new int[rows][cols];
+
+You can also use Scanner to take input from the user:
+import java.util.Scanner;
+public class MatrixInput {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int rows = sc.nextInt();
+        int cols = sc.nextInt();
+        int[][] matrix = new int[rows][cols];
+        // Input
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        // Output
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+Matrix Traversal Methods:
+✅ 1. Row-wise Traversal
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+        System.out.print(matrix[i][j] + " ");
+    }
+}
+1,2,3,4,5
+✅ 2. Column-wise Traversal
+for (int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++) {
+        System.out.print(matrix[i][j] + " ");
+    }
+}
+1,
+2,
+….
+
+
+
+
+
+
+✅ 3. Diagonal Traversal
+Main diagonal (i == j)
+for (int i = 0; i < rows; i++) {
+    System.out.print(matrix[i][i] + " ");
+}
+Secondary diagonal (i + j == n - 1)
+for (int i = 0; i < rows; i++) {
+    System.out.print(matrix[i][rows - i - 1] + " ");
+}
+
+Sum of two diagonals in a matrix:
+class Result {
+    public static int diagonalDifference(List<List<Integer>> arr) {
+        int n = arr.size();
+        int primaryDiagonal = 0;
+        int secondaryDiagonal = 0;
+        for (int i = 0; i < n; i++) {
+            primaryDiagonal += arr.get(i).get(i);
+            secondaryDiagonal += arr.get(i).get(n - i - 1);
+        }
+        return Math.abs(primaryDiagonal - secondaryDiagonal);
+    }
+}
+I/P:
+1    2    3
+4    5    6  
+7    8    9
+1    4    7
+2    5    8
+3    6    9
+
+O/P:
+2
+
+
+
+
+
+
+Common Matrix Questions:
+1️⃣ Sum of All Elements
+int sum = 0;
+for (int i = 0; i < rows; i++)
+    for (int j = 0; j < cols; j++)
+        sum += matrix[i][j];
+System.out.println("Sum: " + sum);
+________________________________________
+2️⃣ Transpose of Matrix (Rows ↔ Columns)
+for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < rows; j++) {
+        System.out.print(matrix[j][i] + " ");
+    }
+    System.out.println();
+}
+________________________________________
+3️⃣ Matrix Addition
+int[][] result = new int[rows][cols];
+for (int i = 0; i < rows; i++)
+    for (int j = 0; j < cols; j++)
+        result[i][j] = matrix1[i][j] + matrix2[i][j];
+________________________________________
+
+
+
+4️⃣ Matrix Multiplication
+int[][] result = new int[rows1][cols2];
+for (int i = 0; i < rows1; i++) {
+    for (int j = 0; j < cols2; j++) {
+        for (int k = 0; k < cols1; k++) {
+            result[i][j] += matrix1[i][k] * matrix2[k][j];
+        }
+    }
+}
+________________________________________
+5️⃣ Identity Matrix Check
+boolean isIdentity = true;
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        if (i == j && matrix[i][j] != 1)
+            isIdentity = false;
+        else if (i != j && matrix[i][j] != 0)
+            isIdentity = false;
+    }
+}
+________________________________________
+6️⃣ Upper/Lower Triangular Matrix Check
+Upper Triangular: All values below main diagonal must be 0
+boolean isUpper = true;
+for (int i = 1; i < n; i++)
+    for (int j = 0; j < i; j++)
+        if (matrix[i][j] != 0)
+            isUpper = false;
+
+
+
+Lower Triangular: All values above main diagonal must be 0
+boolean isLower = true;
+for (int i = 0; i < n; i++)
+    for (int j = i+1; j < n; j++)
+        if (matrix[i][j] != 0)
+            isLower = false;
+________________________________________
+7️⃣ Spiral Traversal of Matrix
+int top = 0, bottom = rows - 1, left = 0, right = cols - 1;
+while (top <= bottom && left <= right) {
+    for (int i = left; i <= right; i++)
+        System.out.print(matrix[top][i] + " ");
+    top++;
+    for (int i = top; i <= bottom; i++)
+        System.out.print(matrix[i][right] + " ");
+    right--;
+    if (top <= bottom) {
+        for (int i = right; i >= left; i--)
+            System.out.print(matrix[bottom][i] + " ");
+        bottom--;
+    }
+    if (left <= right) {
+        for (int i = bottom; i >= top; i--)
+            System.out.print(matrix[i][left] + " ");
+        left++;
+    }
+}
+
+Zig-Zag traversal of a matrix:
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void ZigZag(int r,int c, int a[][]){ //row,col,matrix
+        int er=0; //EvenRow
+        int or=1; //oddRow
+        while(er < r || or < r){
+            if(er<r){
+            for(int i=0;i<c;i++){
+                System.out.print(a[er][i]+" ");
+            }
+            er = er+2;
+            }
+            if(or <r ){
+                for(int i = c -1;i>=0;i--){
+                    System.out.print(a[or][i]+" ");
+                }
+                or = or +2;
+            }
+            
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner s =new Scanner(System.in);
+        int r =s.nextInt();
+        int c =s.nextInt();
+        int arr[][]= new int[r][c];
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+            arr[i][j]=s.nextInt();
+        }
+        }
+        ZigZag(r,c,arr);
+        
+        
+    }
+}
+
+
+
+________________________________________
+🔹 Summary
+Topic	Code/Concept
+Declare & Init	int[][] matrix = new int[r][c];
+Input (Scanner)	Nested for-loops
+Output	Print using loops
+Traversals	Row-wise, Col-wise, Diagonals
+Operations	Add, Multiply, Transpose
+Special Checks	Identity, Triangular
+Advanced	Spiral Print, Zig-Zag
+________________________________________
+🔸 Want Practice Questions?
+I can give you 10+ practice questions to build your confidence in matrix questions. Want them? 😄
+Let me know if you want me to explain any of these parts more deeply or with comments in Telugu-style English for easy understanding! 💪
+You said:
+yes
+ChatGPT said:
+Awesome, Shannu! 🔥
+Here are 15 matrix practice questions that cover everything from basics to intermediate and even some tricky ones. These will boost your confidence for any exam or interview. 💯
+________________________________________
+🟢 Beginner-Level Questions
+1️⃣ Print the matrix
+Given a matrix, simply print it in row-wise format.
+2️⃣ Sum of all elements
+Find the total sum of all values in a given matrix.
+3️⃣ Print main diagonal elements
+Elements where i == j.
+4️⃣ Print secondary diagonal elements
+Elements where i + j == n - 1.
+5️⃣ Check Identity Matrix
+Return true if all diagonal elements are 1 and rest are 0.
+6️⃣ Transpose of a matrix
+Rows become columns and vice versa.
+________________________________________
+🟡 Intermediate-Level Questions
+7️⃣ Add two matrices
+Take two matrices of same size and print their sum.
+8️⃣ Multiply two matrices
+Do matrix multiplication: C = A x B.
+9️⃣ Count zeros and ones
+Given a binary matrix (only 0s and 1s), count number of 0s and 1s.
+🔟 Check Upper or Lower Triangular
+Check if matrix is upper or lower triangular.
+1️⃣1️⃣ Row with maximum sum
+Return the row number that has the highest sum.
+________________________________________
+🔴 Advanced-Level Questions
+1️⃣2️⃣ Spiral traversal of matrix
+Print matrix in a spiral form clockwise.
+1️⃣3️⃣ Diagonal sum (both diagonals)
+Print sum of both diagonals (handle center element carefully in odd size).
+1️⃣4️⃣ Search an element in row-column sorted matrix
+Rows and columns are sorted. Search for an element in O(n) time.
+1️⃣5️⃣ Rotate matrix by 90 degrees
+Rotate the matrix clockwise by 90° without using extra space.
+
+
+
+________________________________________
+💡 Bonus: Real-Life Style Practice
+Want to simulate these in competitive coding style (input/output format)? I can format these like:
+Input:
+3 3
+1 2 3
+4 5 6
+7 8 9
+
+Output:
+Diagonal Sum = 15
+
