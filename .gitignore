@@ -16,6 +16,7 @@ out/
 *.webp
 *.pdf
 *.html
+*.docx
 
 # =========================
 # Ignore all files of a type
