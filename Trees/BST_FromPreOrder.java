@@ -50,7 +50,7 @@ public class BST_FromPreOrder {
             for (int i = 0; i < n; i++) {
                 bstp.build(a, n);
             }
-            sb.append("Node Address (random) : " + bstp.bstFromPreorder(a));
+            sb.append("Node Address (random) : ").append(bstp.bstFromPreorder(a));
         }
         System.out.print(sb);
         s.close();
