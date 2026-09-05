@@ -1,69 +1,35 @@
-# =========================
-# Ignore specific folders
-# =========================
-Podcasts/
-temp/
-logs/
-build/
-dist/
-bin/
-out/
+# =========================================================
+# DEFAULT: IGNORE EVERYTHING
+# =========================================================
+*
 
+# Allow Git to traverse directories
+!*/
 
-# *.png
-*.jpg
-*.jpeg
-*.webp
-*.pdf
-*.html
-*.docx
+# =========================================================
+# ALLOWED FILE TYPES
+# =========================================================
 
-# =========================
-# Ignore all files of a type
-# =========================
-*.log
-*.tmp
-*.bak
-*.cache
-*.class
-*.jar
-*.war
-*.zip
-*.rar
-
-# =========================
-# IDE Files
-# =========================
-# .vscode/
-# .idea/
-*.iml
-
-# =========================
-# OS Files
-# =========================
-.DS_Store
-Thumbs.db
-
-# =========================
 # Java
-# =========================
-# target/
-*.class
+!*.java
 
-# =========================
-# Node.js
-# =========================
-node_modules/
-
-# =========================
 # Python
-# =========================
-# __pycache__/
-# *.pyc
+!*.py
 
-# =========================
-# Ignore everything inside a folder
-# except one file
-# =========================
-# folder_name/*
-# !folder_name/README.md
+# Text
+!*.txt
+
+# Markdown / README
+!*.md
+
+# Images
+!*.jpg
+!*.jpeg
+!*.png
+
+# =========================================================
+# ALLOWED SPECIAL FILES
+# =========================================================
+
+!.gitignore
+!LICENSE
