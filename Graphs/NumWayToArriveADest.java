@@ -60,8 +60,8 @@ public class NumWayToArriveADest {
         int[] ways = new int[n];
         ways[0] = 1;
 
-        // PriorityQueue storing {cost, node}, ordered by cost
         PriorityQueue<long[]> pq = new PriorityQueue<>(Comparator.comparingLong(a -> a[0]));
+        // PriorityQueue storing {cost, node}, ordered by cost
         pq.add(new long[]{0, 0});
 
         while (!pq.isEmpty()) {
