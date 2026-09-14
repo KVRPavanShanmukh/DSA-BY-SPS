@@ -15,7 +15,7 @@ Total amount you can rob = 1 + 3 = 4.
 
 import java.util.Arrays;
 
-public class House_Robber {
+public class House_Robber_I {
 
     public static int RecursivelyRobbingMoney(int a[], int i) {
         /*  Here the condition is that adjacent houses cannot be robbed In that situation, it is a pick and a not pick

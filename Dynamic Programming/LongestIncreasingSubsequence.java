@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class LongestIncreasingSubsequence {
     public static int LIS(int a[], int n) {
         int dp[] = new int[n];
         //base case:
-        Arrays.fill(dp, 1);  //by default, each ele is valid subseq of length 1.
+        Arrays.fill(dp, 1);  // by default, each ele is valid subseq of length 1.
         int maxLen = 1;
 
         if (n == 0) {
@@ -30,14 +31,7 @@ public class LongestIncreasingSubsequence {
         }
 
         for (int i = 1; i < n; i++) {
-            int k = 0;
-            // int l = i;
-            // while (k <= i) {
-            //     int mid = (k + l) / 2;
-
-            // }
             for (int j = 0; j < i; j++) {
-                // dp[i] = longest subsequence until index i.
                 if (a[i] > a[j]) {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
@@ -48,18 +42,18 @@ public class LongestIncreasingSubsequence {
     }
 
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder();
+        try (Scanner s = new Scanner(System.in)) {
+            StringBuilder sb = new StringBuilder();
 
-        int n = s.nextInt();
-        int a[] = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = s.nextInt();
+            int n = s.nextInt();
+            int a[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = s.nextInt();
+            }
+            // ls.clear(); //remove all elements for new upcoming iterations
+            sb.append("Length of Longest Increasing Subsequence : ").append(LIS(a, n)).append("\n");
+            sb.append("DP in Tabulation is not enough as it takes O(N*N) time in worst case!..").append("\n");
+            System.out.println(sb);
         }
-        // ls.clear(); //remove all elements for new upcoming iterations
-        sb.append("Length of Longest Increasing Subsequence : " + LIS(a, n)).append("\n");
-        sb.append("DP in Tabulation is not enough as it takes O(N*N) time in worst case!..").append("\n");
-        System.out.println(sb);
-        s.close();
     }
 }

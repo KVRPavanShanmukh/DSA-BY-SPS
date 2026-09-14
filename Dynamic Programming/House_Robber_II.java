@@ -18,7 +18,7 @@ Total amount you can rob = 1 + 3 = 4.
 
 import java.util.Arrays;
 
-public class Hourse_Robber_II {
+public class House_Robber_II {
 
     public static int RobLinear(int a[], int st, int end) {
         int dp[] = new int[a.length];
@@ -30,6 +30,7 @@ public class Hourse_Robber_II {
         }
         return dp[len - 1];
     }
+
     public static void main(String[] args) {
         int n = 4;
         int a[] = {1, 2, 3, 1};
@@ -38,14 +39,14 @@ public class Hourse_Robber_II {
         int dp[] = new int[n];
         Arrays.fill(dp, -1);
         //Base cases
-        int ans1 = 0;
-        int ans2 = 0;
-        int ans3 = 0;
-        int ans4 = 0;
+        int ans1;
+        int ans2;
+        int ans3;
+        int ans4;
         ans1 = RobLinear(a, 0, n - 2);
         ans2 = RobLinear(a, 1, n - 1);
-        ans3 = RobLinear(a, 0, m - 2);
-        ans4 = RobLinear(a, 1, m - 1);
+        ans3 = RobLinear(b, 0, m - 2);
+        ans4 = RobLinear(b, 1, m - 1);
 
         System.out.println("For Array 'a' : " + Math.max(ans1, ans2));
         System.out.println("For Array 'b' : " + Math.max(ans3, ans4));
