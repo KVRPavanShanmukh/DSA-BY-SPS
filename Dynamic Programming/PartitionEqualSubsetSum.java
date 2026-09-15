@@ -13,14 +13,13 @@ Output: false
 Explanation: The array cannot be partitioned into equal sum subsets.
  */
 public class PartitionEqualSubsetSum {
-
     /*
     Approach : 
     Basically, the problem is direct modification of subset equals sum K. Because here the thing is, we can easily find it as a modification.
     If we have to partition a given array into two parts based on sum, such that the sums are equal.
     We can Decide whether to partition the array or not. First, this has to be decided. Because if the array of length is even We can partition it
     If not,I have to find the sum of the array. Then I have to divide the sum by 2 and cheque for possibility of dividing array based on that sum in the array.
-     */
+    */
     public static int Sum(int a[]) {
         int sum = 0;
         for (int i = 0; i < a.length; i++) {
@@ -48,8 +47,8 @@ public class PartitionEqualSubsetSum {
             return false;
         }
         int target = sum / 2;
-        return SubsetSumEqualK(i, a, target, 0);
 
+        return SubsetSumEqualK(i, a, target, 0);
     }
 
     public static boolean PartitionSubsetSum_Recurse(int i, int a[]) {
@@ -96,7 +95,6 @@ public class PartitionEqualSubsetSum {
 
     public static boolean PartitionSubsetSum_TAB(int a[]) {
         int totalSum = Sum(a);
-
         if (totalSum % 2 != 0) {
             return false;
         }
@@ -105,12 +103,10 @@ public class PartitionEqualSubsetSum {
         int n = a.length;
 
         boolean[][] dp = new boolean[n + 1][target + 1];
-
         dp[0][0] = true;
 
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= target; j++) {
-
                 // Not Take
                 dp[i][j] = dp[i - 1][j];
 
